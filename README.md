@@ -3,28 +3,36 @@ UC Berkeley CS 194/294-196 (LLM Agents) 的简体中文翻译以及笔记。正�
 
 暂时先更新于CSDN专栏：https://blog.csdn.net/bbqbro/category_12800996.html
 
+
 # 预备知识
 
 ## 英文缩写&术语
 
-| 英语                                  | 简中         | 补充                                                         |
-| ------------------------------------- | ------------ | ------------------------------------------------------------ |
-| Large Language Model (LLM)            | 大语言模型   |                                                              |
-| Artificial General Intelligence (AGI) | 通用人工智能 | 一个远大的目标                                               |
-| Agent                                 | 智能体/代理  |                                                              |
-| Embody                                | 具身         |                                                              |
-| Multi-Agent System (MAS)              | 多智能体系统 |                                                              |
-| Token                                 |              | 文本分割后得到的最小语义单位                                 |
-| Prompt                                | 提示词       | 我们向AI提出的问题或指令                                     |
-| Reason                                | 推理         | 模型根据已有的知识，通过逻辑的推导得出结论                   |
-| align                                 | 对齐         | 确保大语言模型的行为与用户的意图或期望一致                   |
-| Chain-of-Thought (CoT)                |              | 让LLM通过(intermediate step)解决问题的技术                   |
-| decode                                | 解码         | 将模型生成的内部表示转化为人类可读的文本的过程               |
-| Universal Self-Consistency (USC)      | 通用自一致性 |                                                              |
-| Retrieval-Augmented Generation (RAG)  | 检索增强生成 | 在生成模型中引入检索机制，使得模型能够在生成文本之前从外部知识库中检索相关信息 |
-| Reinforcement Learning (RL)           | 强化学习     | 智能体通过与环境进行交互，根据得到的奖励或惩罚来调整自己的行为，最终目标是最大化累计奖励 |
-| Human-computer interface (HCI)        | 人机界面     |                                                              |
-| Agent-computer interface (ACI)        |              |                                                              |
+| 英语                                                         | 简中                            | 补充                                                         |
+| ------------------------------------------------------------ | ------------------------------- | ------------------------------------------------------------ |
+| Large Language Model (LLM)                                   | 大语言模型                      |                                                              |
+| Artificial General Intelligence (AGI)                        | 通用人工智能                    | 一个远大的目标                                               |
+| Agent                                                        | 智能体/代理                     |                                                              |
+| Embody                                                       | 具身                            |                                                              |
+| Multi-Agent System (MAS)                                     | 多智能体系统                    |                                                              |
+| Token                                                        |                                 | 文本分割后得到的最小语义单位                                 |
+| Prompt                                                       | 提示词                          | 我们向AI提出的问题或指令                                     |
+| Reason                                                       | 推理                            | 模型根据已有的知识，通过逻辑的推导得出结论                   |
+| align                                                        | 对齐                            | 确保大语言模型的行为与用户的意图或期望一致                   |
+| Chain-of-Thought (CoT)                                       |                                 | 让LLM通过(intermediate step)解决问题的技术                   |
+| decode                                                       | 解码                            | 将模型生成的内部表示转化为人类可读的文本的过程               |
+| Universal Self-Consistency (USC)                             | 通用自一致性                    |                                                              |
+| Retrieval-Augmented Generation (RAG)                         | 检索增强生成                    | 在生成模型中引入检索机制，使得模型能够在生成文本之前从外部知识库中检索相关信息 |
+| Reinforcement Learning (RL)                                  | 强化学习                        | 智能体通过与环境进行交互，根据得到的奖励或惩罚来调整自己的行为，最终目标是最大化累计奖励 |
+| Human-computer interface (HCI)                               | 人机界面                        |                                                              |
+| Agent-computer interface (ACI)                               |                                 |                                                              |
+| Supervised Fine-Tuning (SFT)                                 | 监督微调                        |                                                              |
+| Bidirectional Encoder Representations from Transformers (BERT) | 基于Transformer的双向编码器表示 | 是由Google AI团队开发的一种预训练语言模型。双向编码器是一种在自然语言处理（NLP）中广泛使用的技术，它能够同时考虑一个词语在其上下文中前后两个方向的信息。 |
+| Generative Pre-trained Transformer (GPT)                     | 生成式预训练 Transformer        |                                                              |
+| state-of-the-art (SOTA)                                      | 最先进的                        |                                                              |
+| Parameter-efficient Fine Tuning (PEFT)                       | 参数高效微调                    | 对模型参数进行精细的调整，而不是对所有参数进行大规模的更新   |
+| Low-Rank Adaptation of Large Language Models (LoRA)          | 大语言模型的低秩适应            |                                                              |
+| Natural Language Inference (NLI)                             | 自然语言推理                    | 根据给定的句子推断出逻辑关系                                 |
 
 ## 老师背景
 
@@ -1422,19 +1430,30 @@ idea: 如果无法优化agent，则可以优化环境
 
 全篇提到的论文：
 
-| 论文                                                         |      |      |
+| 非项目论文                                                   |      |      |
 | :----------------------------------------------------------- | ---- | ---- |
 | Zaharia et al. 2024. The Shift from Models to Compound AI Systems |      |      |
-|                                                              |      |      |
+| Initial Prototype Flexible multi-agent conversation framework Code/function execution |      |      |
+| StateFlow - Build State-Driven Workflows with Customized Speaker Selection in GroupChat |      |      |
 |                                                              |      |      |
 
-全篇提到的项目：
 
-| 项目 |      |      |
-| :--- | ---- | ---- |
-|      |      |      |
-|      |      |      |
-|      |      |      |
+
+项目：
+
+| **项目**         |      |      |
+| ---------------- | ---- | ---- |
+| AutoGen          |      |      |
+| OpenAI Assistant |      |      |
+| LlamaIndex       |      |      |
+| LangChain        |      |      |
+| Langraph         |      |      |
+| CrewAI           |      |      |
+| SciAgents        |      |      |
+| Agent-E          |      |      |
+| MemGPT           |      |      |
+| AutoBuild        |      |      |
+| LlamaParse       |      |      |
 
 
 
@@ -1446,9 +1465,9 @@ Agent AI Frameworks & AutoGen
 
 Agenda
 
-Agentic AI Frameworks
+1. Agentic AI Frameworks
 
-AutoGen
+2. AutoGen
 
 
 
@@ -1465,3 +1484,1647 @@ Genertive -> Agentic
 Generate content like text & image -> Execute complex tasks on behalf of human
 
 生成内容如文本和图像 -> 代表人类执行复杂任务
+
+
+
+## Examples of Agentic AI
+
+Personal assistants
+
+Autonomous robots
+
+Gameing agents
+
+Science agents
+
+Web agents
+
+Software agents
+
+
+
+## Key Benefits of Agentic AI
+
+Use Interface
+
+​	Natural interaction with human agency
+
+Strong Capability
+
+​	Operate with minimal human intervention
+
+Useful Architecture
+
+​	Intuitive programming paradigm
+
+使用界面
+
+​	与人类机构的自然互动
+
+强大的能力
+
+​	以最少的人为干预进行操作
+
+有用的架构
+
+​	直观的编程范式
+
+
+
+![image-20241008160544103](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410081605398.png)
+
+1. User -> Commander: User Quesion
+2. Commander -> Writer: Question
+3. Writer -> Commander: Code
+4. Commander -> Safeguard: Code
+5. Safeguard -> Commander: Clearance
+6. Commander -> Writer: Log
+7. Writer -> Commander: Answer
+8. Commander -> User
+
+4~6: Repeat until answering the user’s question or timeout
+
+
+
+### 流程分析
+
+1. **用户提问（User Question）**
+   - **描述**：用户向系统提交一个问题。这个问题是交互的起点，系统需要对此作出反应。
+   - **作用**：这是整个交互流程的第一步，决定了接下来的处理步骤。
+
+2. **指挥者（Commander）**
+   - **描述**：指挥者是整个流程的核心，负责协调各个组件之间的交互。
+   - **作用**：它接收用户问题并管理后续的信息流动。
+
+3. **将问题传递给编写者（Question）**
+   - **描述**：指挥者把用户提出的问题传递给编写者。
+   - **作用**：此步骤确保编写者能够获得问题的上下文，以便进行适当的处理。
+
+4. **编写者生成代码（Code）**
+   - **描述**：编写者根据接收到的问题生成相应的代码。
+   - **作用**：这一步是关键，因为生成的代码将影响后续的安全性和准确性。
+
+5. **指挥者审查代码（Code）**
+   - **描述**：指挥者将生成的代码传递给安全保障系统进行审查。
+   - **作用**：这一步确保代码在执行之前经过安全性检查，避免潜在风险。
+
+6. **安全保障确认（Clearance）**
+   - **描述**：安全保障系统检查代码，确保其无误并安全后，向指挥者发出许可。
+   - **作用**：这一环节提供了一个安全网，以防止不安全或有害的代码被执行。
+
+7. **记录日志（Log）**
+   - **描述**：指挥者将信息记录在日志中，以便后续审查或调试。
+   - **作用**：日志记录有助于追踪问题的来源，并为未来的优化提供参考。
+
+8. **编写者返回答案（Answer）**
+   - **描述**：编写者根据用户的问题和生成的代码，形成最终的答案。
+   - **作用**：这是响应用户的关键环节，确保用户得到所需的信息。
+
+9. **指挥者返回最终答案给用户（Final Answer）**
+   - **描述**：指挥者将编写者生成的最终答案传回给用户。
+   - **作用**：这是整个流程的结束，用户得到了他们所询问的信息。
+
+这个流程通过多个组件的协作，确保用户的提问能够被准确、安全地处理和回答。指挥者在其中起到了协调者的角色，而编写者和安全保障系统则分别负责内容生成和安全审查。这样的设计不仅提高了系统的准确性，还增强了其安全性，避免了可能的风险。
+
+
+
+## Agentic Programming
+
+* Handle more complex tasks / Improve response quality
+    * Improve over natural iteration
+    * Divide & conquer
+    * Grounding & validation
+* Easy to understand, maintain, extend
+    * Modular composition
+    * Natural human participion
+    * Fast & creative experimentation
+
+**处理更复杂的任务 / 提升响应质量**
+- 通过自然迭代进行改进
+- 分而治之
+- 以实际情况为基础进行验证
+
+**易于理解、维护和扩展**
+- 模块化组合
+- 自然的人为参与
+- 快速且具有创意的实验
+
+
+
+![image-20241008212656599](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410082126740.png)
+
+![image-20241008212717301](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410082127529.png)
+
+
+
+## Agentic AI Framework Desiderata
+
+- **Agentic AI Framework Desiderata**
+- Intuitive unified agentic abstraction
+- Flexible multi-agent orchestration
+- Effective implementation of agentic design patterns
+- Support diverse application needs
+
+- **代理型AI框架的必要条件**
+- 直观统一的代理抽象
+- 灵活的多代理编排
+- 有效实现代理设计模式
+- 支持多样化的应用需求
+
+
+
+这张图表描述了设计代理型AI框架时的关键需求（Desiderata），即满足该框架的一系列理想特性：
+
+1. **直观统一的代理抽象（Intuitive unified agentic abstraction）**：
+   - 该框架应该提供简洁、统一的抽象模型，便于开发者理解和使用代理系统。
+   
+2. **灵活的多代理编排（Flexible multi-agent orchestration）**：
+   - 框架需能够协调多个代理的交互，具有高度的灵活性，以适应复杂的场景和任务。
+   
+3. **有效实现代理设计模式（Effective implementation of agentic design patterns）**：
+   - 框架应能够有效地实现常见的代理设计模式，帮助开发者以模块化和结构化的方式构建系统。
+   
+4. **支持多样化的应用需求（Support diverse application needs）**：
+   - 该框架应具备通用性，能够支持不同领域的应用需求，包括不同规模和复杂度的代理系统。
+
+这几项需求确保代理型AI系统既能满足开发的灵活性和扩展性，又能提供适合不同场景的解决方案。
+
+
+
+## Multi-Agent Orchestration
+
+
+
+![image-20241008215025636](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410082150855.png)
+
+**多智能体编排**是一种在人工智能领域，尤其是分布式系统中，协调多个智能体（Agent）共同完成复杂任务的技术。这些智能体可以是软件程序、机器人、虚拟角色等，它们具有自主性，能够感知环境、做出决策并执行行动。
+
+**智能体（Agent）**：系统中的基本单位，具有感知、决策和行动能力。
+
+**编排**：对多个智能体的行为进行协调和控制，以实现共同目标。
+
+
+
+- **Multi-Agent Orchestration**
+  - Static/dynamic
+  - NL/PL
+  - Context sharing/isolation
+  - Cooperation/competition
+  - Centralized/decentralized
+  - Intervention/automation
+
+- **多智能体编排**
+  - 静态/动态
+  - 自然语言/编程语言
+  - 上下文共享/隔离
+  - 协作/竞争
+  - 集中化/去中心化
+  - 干预/自动化
+
+
+
+这张图表描述了多代理系统的各种编排方式，阐述了在设计多代理系统时可能遇到的不同选择和设计模式：
+
+1. **静态/动态 (Static/dynamic)**：
+   - 静态代理系统指的是角色和交互模式预先确定的系统，而动态系统可以根据环境或输入进行调整和改变。
+
+2. **自然语言/编程语言 (NL/PL)**：
+   - 多智能体系统可以使用自然语言（NL）与用户或其他代理进行交互，或者使用编程语言（PL）进行更结构化的通信。
+
+3. **上下文共享/隔离 (Context sharing/isolation)**：
+   - 智能体之间可以共享上下文信息（例如共享环境状态或任务信息），也可以保持隔离以确保任务独立性或信息隐私。
+
+4. **协作/竞争 (Cooperation/competition)**：
+   - 代理可以通过合作方式共同完成任务，或者通过竞争方式争夺资源或达成目标。
+
+5. **集中化/去中心化 (Centralized/decentralized)**：
+   - 集中化系统中存在一个中心控制代理来协调其他代理的行为，而去中心化系统则依赖于各代理的独立决策和行动。
+
+6. **干预/自动化 (Intervention/automation)**：
+   - 系统可以设计成允许人工干预，在必要时进行手动调整，也可以完全自动化，代理自主完成所有任务。
+
+#### 图解部分：
+- **上半部分**：
+   - 显示了一个具有指挥者（Commander）的多代理系统，指挥者与多个代理互动，协调他们的任务和行为。
+   
+- **下半部分**：
+   - 描绘了一个带有“经理（Manager）”的场景，经理通过广播与多个代理互动，并选择其中一个代理进行更直接的“对话（Speak）”。
+
+
+
+## Agent Design Patterns
+
+Conversation
+
+Prompting & reasoning
+
+Tool use
+
+Planing
+
+Integrating multiple models, modalities and memories
+
+**Agent 设计模式**
+
+对话
+
+提示与推理
+
+工具使用
+
+规划
+
+整合多种模型、模式和记忆
+
+
+
+**Agent 设计模式**是一套用于设计和实现智能体的可复用解决方案。这些模式基于人工智能领域的最佳实践和既定原则，提供了一种结构化的方式来构建能够有效感知环境、推理并从经验中学习的智能体。
+
+**第一性原理**，简单来说，就是从最基本的、不可再分的原理出发，通过逻辑推理和数学计算，来理解和预测复杂系统的行为。这种方法不依赖于经验公式或模型，而是直接从系统的基本构成要素和物理定律出发，逐层推导。
+
+
+
+## Example of Agentic AI Frameworks
+
+* AutoGen
+    * Multi-agent conversation programming
+        * Comprehensive & flexible
+        * Integrable with other frameworks like OpenAI Assistant, LlamaIndex, LangChain
+* Langchain-based
+    * Langraph
+        * Graph-based control flow
+    * CrewAI
+        * High-level static agent-task workflow
+
+- **AutoGen**
+  - 多代理对话编程
+    - 全面且灵活
+    - 可与其他框架集成，如OpenAI Assistant、LlamaIndex、LangChain
+- **基于LangChain**
+  - **Langraph**
+    - 基于图的控制流
+  - **CrewAI**
+    - 高级静态代理任务工作流程
+
+
+
+1. **AutoGen**
+   - **多代理对话编程**：AutoGen提供了一种全面且灵活的方法来实现多代理系统中的对话编程。通过这种编程方法，多个代理可以通过对话协作来完成复杂任务，适用于需要多方合作或互动的应用场景。
+   - **与其他框架集成**：AutoGen的一个显著特点是它能够与其他流行的AI框架集成，如OpenAI Assistant、LlamaIndex和LangChain。这种兼容性意味着开发者可以将AutoGen纳入现有系统中，实现更强大的多代理对话系统。
+
+2. **基于LangChain**
+   - **Langraph**：Langraph是一种基于图的控制流模型。这意味着任务或操作可以通过图结构来管理和控制，允许开发者定义任务的依赖关系和执行顺序。这种图结构的设计通常用于处理复杂的工作流或任务编排，尤其是在多步骤和多路径的任务处理中。
+   - **CrewAI**：CrewAI提供了一个高级的静态代理任务工作流系统。这种工作流是静态的，意味着代理的任务分配和执行顺序是在开发时就预先设定好的，不会根据动态变化进行调整。CrewAI特别适合需要明确任务分配和执行次序的场景，确保代理在系统中的任务是有序且可控的。
+
+
+
+以下是对 AutoGen、OpenAI Assistant、LlamaIndex、LangChain、Langraph 和 CrewAI 的解释：
+
+### 1. **AutoGen**
+AutoGen 是一种多代理对话编程框架，专注于通过协调多个人工智能代理来完成复杂任务。它支持多代理系统的构建，使多个代理可以协作、共享信息，并基于上下文来做出智能决策。AutoGen 特点是灵活性和广泛的兼容性，能够与其他 AI 框架（如 OpenAI Assistant、LlamaIndex 和 LangChain）集成，从而增强多代理的交互能力。
+
+### 2. **OpenAI Assistant**
+OpenAI Assistant 是 OpenAI 提供的智能对话系统，基于其强大的自然语言处理模型（如 GPT 系列）。它支持与人类进行自然对话，并且可以执行任务、回答问题、生成文本内容等。OpenAI Assistant 可以用于广泛的应用场景，如虚拟助手、客服、教育等。
+
+### 3. **LlamaIndex**
+LlamaIndex 是一个工具，旨在从大规模数据集（如文档、数据库或知识库）中构建索引，便于快速检索信息。它结合了自然语言处理和搜索技术，允许用户在庞大信息库中高效查询。LlamaIndex 的核心在于将结构化和非结构化数据转化为易于检索的格式，提升搜索速度和准确度。
+
+### 4. **LangChain**
+LangChain 是一个用于构建和管理语言模型的框架。它的主要目标是简化与大型语言模型（如 GPT）集成的开发过程，帮助开发者轻松创建支持复杂任务的语言应用。LangChain 特别侧重于语言模型与外部系统（如数据库、API）的交互，通过提供工具来控制任务流，处理多步骤工作流程。
+
+### 5. **Langraph**
+Langraph 是基于 **LangChain** 的扩展，采用图结构来管理任务流和控制流。在多步骤的复杂任务中，Langraph 使用图形化的方式表示不同任务节点之间的依赖关系，使开发者可以直观地设计任务的执行顺序和路径。它适用于需要并行执行和分支控制的复杂应用场景。
+
+### 6. **CrewAI**
+CrewAI 是一种专注于静态任务工作流程的高层次代理任务管理框架。它为代理任务提供了一个预定义的静态工作流，确定了任务分配和执行的固定路径。CrewAI 在任务管理和执行时更注重确定性，适用于那些不需要动态调整的多代理系统。通过这种框架，开发者可以确保任务执行的顺序和分配是可预测且稳定的。
+
+
+
+## simply two steps
+
+1、Define agents: Conversable & Customizable (Conversable agent)
+
+2、Get them to talk: Conversation Programming
+
+![image-20241009100956740](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410091010068.png)
+
+![image-20241009101755181](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410091017505.png)
+
+![image-20241009101847619](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410091018851.png)
+
+![image-20241009102431169](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410091024411.png)
+
+![image-20241009104329096](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410091043294.png)
+
+1. **Evaluation (评估)**
+
+- **Agent-based evaluation tools (基于代理的评估工具)**
+    - **Examples: AgentEval, AutoDefense, Observability**
+    - **中文翻译**: 基于代理的评估工具
+        - 示例：AgentEval、AutoDefense、Observability
+    - **解释**：此部分描述了用于评估多代理系统的工具。这些工具主要用于衡量和评估不同代理的性能、安全性和可观察性。例如，AgentEval 可能是一个用于评估代理执行效果的系统，而 AutoDefense 则专注于自动化的防御策略，Observability 提供对系统行为的可见性和监控能力。
+
+2. **Interface (界面)**
+
+- **Lower the barrier of programming (降低编程的门槛)**
+    - **Examples: AutoBuild, Composable Actor Platform**
+    - **中文翻译**: 降低编程的门槛
+        - 示例：AutoBuild、Composable Actor Platform
+    - **解释**：这部分强调了如何降低开发人员使用和创建多代理系统的难度。AutoBuild 可能是一个自动化构建工具，使用户能够快速开发和部署多代理系统，而 Composable Actor Platform 则可能是一种模块化平台，允许用户通过简单的组件组合来创建代理，极大地降低了编程和开发的复杂性。
+
+3. **Learning/Teaching/Optimization (学习/教学/优化)**
+
+- **Agents made smarter (使代理更智能)**
+    - **Examples: AgentOptimizer, EcoAssistant, Learn to Cooperate**
+    - **中文翻译**: 使代理更智能
+        - 示例：AgentOptimizer、EcoAssistant、Learn to Cooperate
+    - **解释**：这一部分集中在如何通过学习、教学和优化来提升代理的智能水平。例如，AgentOptimizer 可能是用于优化代理策略的工具，而 EcoAssistant 则可能用于帮助代理优化在复杂环境中的资源使用。Learn to Cooperate 可能涉及多个代理之间的协作学习，使它们在合作任务中表现得更好。
+
+
+
+这个图片展示了多代理系统的三个重要方面：**评估**、**界面** 和 **学习/教学/优化**。每个方面都列出了相关的工具示例，帮助开发者和研究人员更好地创建、评估和优化多代理系统。这些工具和平台共同作用，可以降低开发复杂性、提升系统性能，并使代理能够更智能地适应复杂的任务和环境。
+
+
+
+![image-20241009105210863](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410091052075.png)
+
+#### 1. **How to design optimal multi-agent topology? (如何设计最优的多代理拓扑结构？)**
+   - **Quality (质量)**
+   - **Monetary Cost (货币成本)**
+   - **Latency (延迟)**
+   - **Manual Effort (人工投入)**
+   - **中文翻译**：如何设计最优的多代理拓扑结构？
+      - 质量、货币成本、延迟、人工投入
+   - **解释**：这一部分提到了在设计多代理系统时需要考虑的几个关键因素。要设计一个最优的多代理拓扑结构，需要平衡系统的质量、经济成本、延迟（即代理之间的通信或执行任务的时间延迟）以及需要的人力投入。这些因素是评估系统效率和可行性的关键。
+
+#### 2. **How to create highly capable agents? (如何创建高能力的代理？)**
+   - **Reasoning (推理能力)**
+   - **Planning (规划能力)**
+   - **Modality (多模态处理)**
+   - **Learning (学习能力)**
+   - **中文翻译**：如何创建高能力的代理？
+      - 推理、规划、多模态处理、学习
+   - **解释**：为了打造强大的智能代理，系统需要具备一些核心能力。推理能力意味着代理能够理解和处理复杂的信息。规划能力是指代理能有效规划其任务和行动。多模态处理则意味着代理能够处理不同类型的数据和信息源（如图像、文本等）。学习能力意味着代理可以通过过去的经验或数据不断自我提升。
+
+#### 3. **How to enable scale, safety and human agency? (如何实现规模化、安全性以及人类代理？)**
+   - **Parallelization (并行化)**
+   - **Resilience (弹性)**
+   - **Intent (意图识别)**
+   - **Teaching (教学能力)**
+   - **中文翻译**：如何实现规模化、安全性和人类代理？
+      - 并行化、弹性、意图识别、教学能力
+   - **解释**：当涉及大规模多代理系统时，如何扩展并保持系统的安全性至关重要。并行化允许多个代理同时执行任务，从而提升系统的效率。弹性是系统在面对错误或故障时依然能够正常运行的能力。意图识别是系统能够理解和识别人类或其他代理意图的能力。而教学能力则指系统能够与人类或其他代理互动并传授其知识或技能的能力，这对于人机协作至关重要。
+
+
+
+## Jerry Liu: Building an Multimodal Knowledge Assistant
+
+LlamaIndex:
+
+Build Production LLM APPsover Enterprise Data
+
+LlamaIndex helps any developer build context-augmented LLM apps from prototype to production.
+
+基于企业数据构建生产LLM应用程序
+
+LlamaIdex帮助任何开发人员构建从原型到生产的上下文增强LLM应用程序。
+
+
+
+## Build a Knowledge Assistant
+
+Goal: Build an interface that can take in any tasks as input and give back an output.
+
+Input forms: simple questions, complex questions, research tasks
+
+Output forms: short answer, structured output, research report
+
+目标：构建一个可以接收任何任务作为输入并返回输出的界面。
+
+输入形式：简单问题、复杂问题、研究任务
+
+输出形式：简答题、结构化输出、研究报告
+
+
+
+## Knowledge Assistant with Basic RAG
+
+![image-20241009111949750](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410091119038.png)
+
+
+
+## Can we do more?
+
+除了基本的RAG流程管道外，还能做什么？
+
+There's many questions/tasks that naive RAG cant't give an answer to
+
+* huallucinations
+* Limited time savings
+* Limited decision-making enhancement
+
+
+
+## A Better Knowledge Assistant
+
+1. High-quality Multimodel RAG
+2. Complex output generation
+3. Agentic reasoning over complex inputs
+4. Towards a scalable, full-stack application
+
+**成为更好的知识助理的四个重要要素**
+
+1. 高质量多模态RAG
+2. 可生成复杂输出
+3. 能对复杂输入进行智能体推理
+4. 能够成为可扩展的全栈APP
+
+
+
+1 High-quality Multimodel RAG：
+
+Advanced Data and Retrieval   高级数据和检索
+
+Data -> Data Processing -> Index -> Agent -> Response   数据 -> 数据处理 -> 索引 -> 代理 -> 响应
+
+
+
+2 Complex output generation:
+
+Report Generation, Data Analysis, Action-Taking   报告生成、数据分析、行动采取。
+
+
+
+3 Agentic reasoning over complex inputs:
+
+Other Tools
+
+Advanced RAG and Retrieval Tool -> Agent (Tool Use, Memory, Query Planning, Reflection) -> Response
+
+高级RAG和检索工具 -> 代理（工具使用、记忆、查询规划、反思） -> 响应
+
+在多模态RAG pipeline中加入Agent推理层
+
+
+
+4 Towards a scalable, full-stack application
+
+不重要
+
+
+
+# Lecture 4, Burak Gokturk
+
+LLM Agents
+
+Enterprise Trends for Generative AI   生成式 AI 领域的企业动向
+
+Key Blocks to buid successful agents   成果构建智能体的关键模块
+
+What's next?
+
+
+
+## 提到的项目
+
+| 项目               |      |      |
+| ------------------ | ---- | ---- |
+| Gemini             |      |      |
+| Claude - Anthropic |      |      |
+| glean              |      |      |
+| Vertex AI          |      |      |
+
+
+
+## Key Trends in Generative AI
+
+- **Some observations**
+   - In recent years, ML has completely changed our expectations of what is possible with computers
+   - Increasing scale (compute, data, model size) delivers better results
+   - The kinds of computations we want to run and the hardware on which we run them is changing dramatically
+
+- **一些观察**
+   - 近年来，机器学习彻底改变了我们对计算机能力的预期
+   - 增加规模（计算能力、数据、模型大小）可以带来更好的结果
+   - 我们希望运行的计算类型以及运行它们的硬件正在发生巨大变化
+
+
+
+1. **机器学习改变预期**：近几年，随着机器学习的迅猛发展，计算机可以完成的任务范围和能力已经超出了以往的预期。机器学习使得计算机不仅限于传统任务（如存储、基本运算），而是能够处理复杂的模式识别、预测分析等任务，从而在很多领域取得突破。
+
+2. **扩大规模带来更好结果**：随着计算能力的提升、数据量的增加以及模型规模的扩大，机器学习模型的性能表现显著提高。这意味着更强大的计算设备、更大规模的数据集和更复杂的模型结构可以带来更加精确和有效的结果。
+
+3. **计算类型和硬件的变化**：随着计算需求的改变，所需的计算类型和支持这些计算的硬件也在快速演变。传统的计算模型和硬件可能无法适应现代机器学习的需求，因此新的硬件架构（如GPU、TPU等）和更高效的计算方式（如并行计算）正在逐渐成为主流。
+
+这些观察强调了机器学习在现代计算中的重要性以及为实现更好结果所需的基础设施和资源的快速变化。
+
+
+
+## Transformers + autoregressive training + massive
+
+![image-20241012131320972](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410121313260.png)
+
+- **Transformers + autoregressive training + massive data**
+    - **Backbone architecture**: Diagram of a transformer model structure with multiple layers of multi-head attention and feed-forward layers.
+    - **Next token prediction**: Example showing how the foundation model predicts the next word in a sentence, starting with "I went to the..." and predicting "conference".
+    - **Pre-training on trillions of tokens**: Visualization showing sentences like "The cat sat on the mat", "The teacher read a book", and "I love to dance", illustrating how models are pre-trained on massive datasets.
+
+- **Transformer模型 + 自回归训练 + 海量数据**
+    - **基础架构**：展示了一个Transformer模型的结构图，包含多层的多头注意力机制和前馈神经网络层。
+    - **下一个词的预测**：通过例子展示了基础模型如何预测句子的下一个词，从 "I went to the..." 预测到 "conference"。
+    - **在数万亿的词标上进行预训练**：通过可视化展示了句子，如 "The cat sat on the mat"（猫坐在垫子上），"The teacher read a book"（老师读了一本书），以及 "I love to dance"（我喜欢跳舞），表明模型是在大量数据集上进行预训练的。
+
+
+
+1. **Transformer模型**：Transformer是一种深度学习模型结构，特别适用于自然语言处理任务。图中的架构展示了Transformer模型的典型组件，包括多头注意力机制和前馈神经网络层。这种结构允许模型在不同的输入位置之间创建复杂的依赖关系，使得其在处理长序列时表现非常优越。
+
+2. **自回归训练**：自回归模型是一种序列模型，它根据前一个时间步或前一段文本的输出，来预测下一个时间步或下一个单词。在图片中，模型根据 "I went to the..." 来预测下一个单词 "conference"，说明其利用了上下文信息来进行预测。
+
+3. **海量数据预训练**：模型的性能在很大程度上取决于预训练阶段的数据量。图片中显示了模型在海量语料库上进行训练的过程（数万亿个词标）。通过在如此大规模的数据上进行训练，模型可以捕获语言中的复杂模式和关联，提高其在各种自然语言任务中的表现。
+
+总结来看，这张图片展示了Transformer模型的基础架构、自回归训练方式，以及如何利用大规模数据进行预训练，从而使模型能够在自然语言处理中进行准确的预测。
+
+
+
+## Towards useful AI agents
+
+![image-20241012190847392](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410121908242.png)
+
+更实用的是 RLHF
+
+
+
+- **Towards useful AI agents**
+  - **Supervised Fine-Tuning (SFT)**: 
+    - **Prompt**: "I have pains in my lower back while sleeping. What could be causing this?"
+    - **Output (expert response)**: "You might be experiencing a lower back strain, typically caused by lifting heavy objects or abrupt movements. This can lead to sharp pain in the lower back, especially when moving or lifting..."
+  - **Reinforcement Learning from Human Feedback (RLHF)**:
+    - Diagram showing two paths: 
+      - One through the **SFT model**
+      - Another through the **RL-tuned model**, then **reward model**, and finally reaching the **RL objective**.
+
+- **朝着有用的AI代理迈进**
+  - **监督微调 (SFT)**:
+    - **提示**: “我在睡觉时感到下背部疼痛，可能是什么原因导致的？”
+    - **输出 (专家回应)**: “您可能经历了下背部拉伤，通常由提举重物或突然的动作引起。这可能会导致下背部的剧烈疼痛，尤其是在移动或提举时……”
+  - **基于人类反馈的强化学习 (RLHF)**：
+    - 图示展示了两条路径：
+      - 一条经过 **SFT模型**
+      - 另一条经过 **RL微调模型**，接着是 **奖励模型**，最终到达 **强化学习目标 (RL objective)**。
+
+1. **监督微调 (SFT)**：
+   - SFT 是一种监督学习的方法，模型通过标注好的数据进行训练，提供具有专家水平的响应。图中以下背部疼痛为例，展示了如何根据给定的提示生成一个专家级别的输出。SFT模型会直接生成与问题相关的回答，基于之前训练的数据集的知识。
+   
+2. **基于人类反馈的强化学习 (RLHF)**：
+   - RLHF 是一种将强化学习与人类反馈相结合的模型优化方法。在RLHF中，模型先通过SFT模型生成初步响应，然后通过“RL微调模型”和“奖励模型”来评估生成的回答是否符合预期。**奖励模型根据人类反馈为生成的输出分配奖励或惩罚**，并最终通过强化学习目标进行优化，使模型的表现更加符合人类期望。
+
+3. **两者的比较**：
+   - SFT 专注于通过静态数据提供直接的、预先训练好的专家答案。
+   - RLHF 则允许模型通过人类反馈进行进一步优化，动态调整模型的输出，使其更加符合使用者的需求。RLHF模型在RL目标优化的基础上，能够生成更符合预期的输出结果，并提升其适用性。
+
+总结来看，这张图片展示了两种AI模型训练方法：监督微调 (SFT) 和基于人类反馈的强化学习 (RLHF)。SFT提供了直接的响应，而RLHF通过奖励机制进一步优化了模型的表现，向更有用的AI代理迈进。
+
+
+
+### SFT（Supervised Fine-Tuning）是什么？
+
+**监督微调**（SFT）是机器学习中一种常见的方法，属于**监督学习**的范畴。具体来说，SFT是在预训练模型的基础上，使用标注的高质量数据进行进一步训练，以便让模型在特定的任务上表现更好。其主要特点包括：
+
+1. **监督学习**：SFT使用的是带标签的数据集。也就是说，训练数据中每一个输入都有明确的目标输出（即答案）。通过这种方式，模型可以“学习”如何在相同类型的任务中做出准确的预测或生成合理的响应。
+  
+2. **微调**：与从头开始训练模型不同，SFT通常是在已经经过大规模预训练的模型基础上进行。这种方法利用了模型已经学到的一般知识，并通过额外的训练使其能够在特定领域或任务上表现得更好。
+
+3. **举例**：在自然语言处理（NLP）领域，预训练的大语言模型（如GPT）可以通过SFT被微调，来回答医学问题或法律问题等特定领域的查询。例如，给定一个医疗问题，微调后的模型能生成符合领域知识的回答。
+
+### RLHF（Reinforcement Learning from Human Feedback）是什么？
+
+**基于人类反馈的强化学习**（Reinforcement Learning from Human Feedback, RLHF）是结合了**强化学习**（Reinforcement Learning, RL）和人类反馈的一种机器学习方法。它的核心思想是通过人类提供的反馈来引导模型的优化，使其表现更加符合人类的期望。
+
+1. **强化学习**：不同于监督学习，强化学习的目标是通过试错过程来优化模型的策略。模型在给定任务中做出一系列决策，然后通过一个“奖励机制”来衡量这些决策的好坏。RL的目标是最大化长期的奖励。
+  
+2. **人类反馈**：在RLHF中，人类反馈取代了传统强化学习中的自动奖励机制。具体来说，人类评估模型的输出，并根据输出的好坏给出“奖励”或“惩罚”。通过这些反馈，模型能够学习生成更符合人类期望的输出。
+
+3. **RLHF的过程**：
+   - 首先，模型通过监督微调（SFT）完成初步训练。
+   - 然后，模型生成的输出会被人类评估，反馈用于训练一个奖励模型。
+   - 最后，通过强化学习算法，模型会根据奖励模型的反馈不断调整，以生成更优质的输出。
+
+4. **举例**：在对话系统或生成式AI中，RLHF可以用来改进模型的生成结果。如果模型生成了不合适或偏离预期的回答，人类反馈可以帮助模型纠正这种偏差，逐步生成更符合实际需求的回答。
+
+### 总结
+
+- **SFT**：主要用于在预训练模型基础上，通过带标签的高质量数据进一步优化模型的性能，适合任务是预定义、明确答案的场景。
+  
+- **RLHF**：通过引入人类的反馈来指导模型的优化，特别适合处理开放性任务或模型输出不确定的情况。通过强化学习的方式，模型能够逐步学习符合人类偏好的输出。
+
+
+
+## Enterprise Trends: Trend 1 - The obvious: AI is moving so much faster
+
+Why?
+
+* The amount of data needed has come down
+* Anyone can develop AI
+
+
+
+## Trend 2 - Technical Treads
+
+![image-20241012202029952](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410122020271.png)
+
+![image-20241012202531572](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410122025835.png)
+
+![image-20241012203107068](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410122031771.png)
+
+Where are we headed?
+
+
+
+Separate models for different tasks --> Single model that can generalize across millions of tasks、推理能力
+
+针对不同任务的独立模型 --> 能够泛化处理数百万种任务的单一模型
+
+
+
+Dense models --> Efficient sparse models
+
+稠密模型 --> 高效稀疏模型
+
+**Dense models:** 稠密模型是指模型中的所有参数都是非零的。
+
+**Efficient sparse models:** 高效稀疏模型是指模型中只有部分参数是非零的，这可以减少模型的计算量和存储空间，提高模型的效率。
+
+
+
+Single modality models --> Models that deal with many modalities
+
+单模态 --> 多模态
+
+
+
+## Trend 3 - It is the choice of the platform that matters
+
+重要的是平台的选择
+
+
+
+LMSys Chat Leaderbord Ranks
+
+LMSys Chat Leaderbord Ranks，也就是LMSys聊天机器人竞技场排行榜，是一个用于评估大型语言模型（LLM）性能的众包开放平台。
+
+
+
+## Key success factor for generative AI
+
+![image-20241013221526212](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410132215672.png)
+
+**Key success factors for generative AI**
+1. **Access to a broad set of models**
+   - …so you can find the best model for their use case and budget
+2. **Ability to customize models with your data**
+   - …so you can improve the quality, latency, and performance of the model
+3. **A platform for managing models in production**
+   - …so you can deploy and manage models in a scalable way
+4. **Choice and flexibility at every level**
+   - …so you can avoid vendor lock-in and use the best tools for the job
+
+**生成式 AI 成功的关键因素**
+
+1. **访问广泛的模型集**
+   - …这样你可以根据具体的用例和预算找到最合适的模型
+2. **使用你的数据定制模型的能力**
+   - …这样你可以提高模型的质量、延迟和性能
+3. **用于生产环境中管理模型的平台**
+   - …这样你可以以可扩展的方式部署和管理模型
+4. **每个层级的选择和灵活性**
+   - …这样你可以避免供应商锁定，并使用最适合任务的工具
+
+
+
+这张图片描述了生成式AI应用中取得成功的四个关键因素：
+
+1. **访问广泛的模型集**：这意味着企业或开发者需要能够访问各种各样的AI模型，以便根据其特定的需求、用例和预算选择最合适的模型。这可以帮助用户优化资源使用，并确保他们选择的模型是最佳解决方案。
+
+2. **使用数据定制模型的能力**：这表明，生成式AI模型在实际应用中表现出色的一个关键点是，能够根据特定的数据进行定制。定制可以提升模型的准确性、响应速度（延迟）和整体性能，这对于应用到特定场景中的生成式AI尤为重要。
+
+3. **生产环境中管理模型的平台**：生成式AI不仅需要在实验室中运行良好，还需要在实际生产环境中进行管理和部署。一个好的平台可以帮助团队高效地管理模型的生命周期，包括从训练到部署再到维护，且能够支持模型的可扩展性。
+
+4. **每个层级的选择和灵活性**：避免被某个供应商或特定工具锁定，意味着企业可以自由选择最适合特定任务的工具或模型。这种灵活性可以确保企业在技术演变或新需求出现时迅速适应和调整，从而保持竞争优势。
+
+
+
+## Trend 4 - Cost of API calls is approaching 0
+
+API调用的成本接近0
+
+
+
+## Trend 5 - Search
+
+Another big realization
+
+LLM and Search need to come together.
+
+
+
+## Trend 6 - Enterprise Search/Assistant
+
+Enterprise Learnings with wheir AI investments   企业通过AI投资过程学习
+
+
+
+全球芯片依然短缺
+
+
+
+![image-20241013233759539](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410132337785.png)
+
+
+
+## Agumentation tools to enhance capabilities of foundation models
+
+增强基础模型能力的扩展工具
+
+![image-20241013234604311](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410132346711.png)
+
+**Augmentation tools to enhance capabilities of foundation models**
+1. **Tuning/Distillation**
+   - Customize based on specific data and use case
+   - Create a smaller model for cost/latency purposes
+2. **Grounding**
+   - Combine with search to make it factual
+3. **Extensions/Function Calling**
+   - Function calling to be able to make LLMs on areas where they perform poorly
+
+**增强基础模型能力的扩展工具**
+
+1. **微调/蒸馏**
+   - 基于特定数据和用例进行定制
+   - 创建一个较小的模型以降低成本/延迟
+2. **基础对接**
+   - 与搜索结合，使其更加事实化
+3. **扩展/函数调用**
+   - 使用函数调用来增强大型语言模型（LLMs）在其表现不佳的领域中的能力
+
+
+
+这张图片介绍了三种用于增强基础模型能力的工具：
+
+1. **微调/蒸馏**：这是通过使用特定的数据和用例来定制模型的过程。通过这样的定制，可以生成一个体积较小的模型，达到降低计算成本和延迟的目的。蒸馏是一种模型压缩技术，将大模型的知识转移到较小的模型中，从而保持高性能的同时减少资源消耗。
+
+2. **基础对接**：这是通过将生成模型与搜索功能相结合，使生成的内容更加符合事实。这个方法有助于避免生成虚假的或不准确的信息，确保输出的可靠性和准确性。
+
+3. **扩展/函数调用**：这是通过添加函数调用功能，提升大型语言模型在其弱项领域的表现。通过调用特定的函数或工具，可以弥补模型在某些任务中的不足，比如执行复杂计算或访问外部数据库的能力。
+
+这些工具帮助提升基础模型的性能，使其更加高效、精确和灵活。
+
+
+
+**模型蒸馏**（Model Distillation）是一种机器学习技术，它的核心思想是将一个复杂的大模型（教师模型）的知识“蒸馏”到一个更小、更简单的模型（学生模型）中。就好比一位经验丰富的老师在教导一位初学者一样，教师模型将自己学到的知识和经验传授给学生模型，让学生模型也能具备较强的预测能力。
+
+为什么需要模型蒸馏？
+
+- **模型压缩：** 大模型通常参数量巨大，占用大量计算资源。通过蒸馏，我们可以获得一个更小的模型，部署到资源有限的设备上，例如移动端或嵌入式系统。
+- **加速推理：** 小模型的计算量更小，推理速度更快，可以提高模型的实时响应能力。
+- **提升泛化能力：** 在某些情况下，小模型在泛化能力方面甚至可以超越教师模型。
+
+模型蒸馏的原理
+
+1. **教师模型训练：** 首先，我们训练一个大型的、性能优异的教师模型。
+2. 知识蒸馏：
+    - **软标签：** 将教师模型的输出概率分布（软标签）作为学生模型的学习目标。相比于传统的硬标签（one-hot编码），软标签包含了更多的信息，可以帮助学生模型更好地学习。
+    - **损失函数：** 除了传统的交叉熵损失函数，我们还可以引入额外的损失函数来约束学生模型，使其更好地模仿教师模型的行为。
+3. **学生模型训练：** 使用教师模型的软标签和额外的损失函数来训练学生模型。
+
+
+
+**模型微调（Fine-tuning）** 就像是对一个已经训练好的大模型进行个性化定制的过程。想象一下，你买了一件成衣，虽然款式不错，但总觉得不太合身。于是，你找裁缝进行一些修改，让衣服更贴合你的身材。模型微调也是如此，它让预训练的大模型能够更好地适应你的特定任务和数据。
+
+为什么需要模型微调？
+
+- **特定任务适配：** 预训练的大模型通常是在海量通用数据上训练的，而你的任务可能非常具体，比如医疗诊断、金融预测等。微调可以帮助模型更好地理解和处理这些特定领域的数据。
+- **提升性能：** 通过微调，模型可以在特定任务上取得更好的性能，例如更高的准确率、更低的误差。
+- **减少训练时间：** 从头开始训练一个大模型需要大量的计算资源和时间。而微调只需要在预训练模型的基础上进行少量调整，可以大大缩短训练时间。
+
+模型微调的原理
+
+1. **预训练模型：** 首先，我们需要一个在海量数据上预训练好的大模型。这个模型已经具备了强大的语言理解能力或图像识别能力。
+2. **特定数据集：** 然后，我们准备一个与我们的任务相关的小数据集。这个数据集应该包含大量的标注数据，用来指导模型进行微调。
+3. **微调过程：** 将预训练模型的最后一层或几层替换或调整，使其适应新的任务。然后，使用特定数据集对模型进行训练，更新模型的参数。
+
+
+
+## Key Components of Customization Agent Builder *
+
+![image-20241014000416337](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410140004629.png)
+
+- **Title:** Key Components of Customization Agent Builder
+- **Four components listed:**
+  1. Fine Tuning
+  2. Distillation
+  3. Grounding
+  4. Function Calling
+
+- **标题:** 定制代理构建器的关键组件
+- **四个列出的组件:**
+  1. 微调
+  2. 蒸馏
+  3. 基础
+  4. 函数调用
+
+
+
+1. **Fine Tuning (微调):**
+   
+   微调指的是使用较小的特定领域数据集对预训练模型进行调整。通过这种方式，模型能够在保留广泛训练能力的同时，专注于某些特定任务。
+   
+2. **Distillation (蒸馏):**
+   
+   蒸馏是一种方法，通过让一个较小的模型模仿较大的模型，提取知识。这有助于创建更高效的模型，同时尽量保持精度。
+   
+3. **Grounding (基础):**
+   
+   基础指的是将AI模型的输出与现实世界的知识或外部资源连接起来，确保模型的回答在实际应用中准确且相关。
+   
+4. **Function Calling (函数调用):**
+   
+   函数调用指的是模型调用外部函数或API获取信息或执行操作的能力，使AI能够更具动态性和处理复杂操作的能力。
+
+
+
+## Tune and customize with your data
+
+![image-20241014000747036](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410140007357.png)
+
+这张图片呈现了一个大模型微调（fine-tuning）的连续谱，从简单且成本效益高的方式到复杂且成本更高的方式。它将微调方法分为四个主要阶段：
+
+- **Prompt design（提示设计）**：这是最简单的方式，通过设计合适的提示词来引导模型生成你想要的输出。
+- **Supervised tuning with distillation（监督微调与蒸馏）**：在这个阶段，模型通过监督学习的方式在特定数据集上进行微调，同时利用蒸馏技术来加速训练过程。
+- **Reinforcement learning with human feedback（基于人类反馈的强化学习）**：这个阶段引入人类反馈，通过强化学习的方式来优化模型，使其更符合人类的期望。
+- **Full fine tuning（全参数微调）**：这是最复杂也是成本最高的方式，对模型的所有参数进行微调，以获得最佳性能。
+
+
+
+| 英文原文                                   | 中文翻译               |
+| ------------------------------------------ | ---------------------- |
+| Tune and customize with your data          | 用你的数据微调和定制   |
+| Simple, cost efficient                     | 简单，成本效益高       |
+| Complex, more expensive                    | 复杂，成本更高         |
+| Prompt design                              | 提示设计               |
+| Supervised tuning                          | 监督微调               |
+| Distillation                               | 蒸馏                   |
+| Reinforcement learning with human feedback | 基于人类反馈的强化学习 |
+| Full fine tuning                           | 全参数微调             |
+
+
+
+- **提示设计（Prompt design）**：通过精心设计的提示词，可以引导模型生成特定类型的文本。这种方法简单易行，但对提示词的质量要求较高。
+- **监督微调（Supervised tuning）**：通过提供大量的标注数据，让模型学习到输入和输出之间的映射关系。蒸馏技术可以加速这个过程，通过将一个大型模型的知识迁移到一个更小的模型上。
+- **基于人类反馈的强化学习（Reinforcement learning with human feedback）**：这种方法将人类的反馈作为奖励信号，通过强化学习的方式来优化模型。这种方法可以使模型更符合人类的价值观和偏好。
+- **全参数微调（Full fine tuning）**：对模型的所有参数进行调整，以获得最佳性能。这种方法通常需要大量的计算资源和数据，但可以取得最好的效果。
+
+
+
+## Popular model adaptation approaches and model goals
+
+![image-20241016181713643](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410161817997.png)
+
+**Popular model adaptation approaches and goals**
+
+1. **Fine Tuning**
+   - Pre-trained Model: Tunable
+   - Input Text
+2. **Prompt Design**
+   - Pre-trained Model: Frozen
+   - Engineered Prompt
+   - Input Text
+3. **Prompt Tuning**
+   - Pre-trained Model: Frozen
+   - Tunable Soft Prompt
+   - Input Text
+4. **Distillation**
+   - Pre-trained Model: Prompt Tuned Teacher
+   - Student
+
+Table details:
+
+- **How does it work?**
+   - Fine-tuning: Regular full model fine-tuning.
+   - Prompt design: No training, just craft the input.
+   - Prompt tuning: Train only 1-100 soft tokens.
+   - Distillation: Distill a large model to a smaller student model.
+   
+- **Training data**
+   - Fine-tuning: 10k-100k.
+   - Prompt design: 1-10 examples (2048 tokens).
+   - Prompt tuning: 100-1k examples.
+   - Distillation: 100-1k labeled, 100k-100M unlabeled.
+   
+- **Training cost**
+   - Fine-tuning: Prohibitively expensive.
+   - Prompt design: Zero.
+   - Prompt tuning: Average cost.
+   - Distillation: Expensive.
+   
+- **Training time**
+   - Fine-tuning: Weeks/Months.
+   - Prompt design: Zero.
+   - Prompt tuning: Tens of minutes.
+   - Distillation: Days.
+   
+- **Quality**
+   - Fine-tuning: Very high.
+   - Prompt design: High.
+   - Prompt tuning: Very high.
+   - Distillation: Very high (slightly lower than teacher).
+   
+- **Inference cost**
+   - Fine-tuning: High.
+   - Prompt design: Zero-shot/Few-shot higher (2x to 5x higher).
+   - Prompt tuning: High (slightly higher than fine-tuned model).
+   - Distillation: Very low.
+   
+- **LLM size**
+   - Fine-tuning: All sizes; large models (>62B).
+   - Prompt design: Large models (62B+).
+   - Prompt tuning: Moderate size (e.g., T5-3B).
+   - Distillation: Large to small models (e.g., 64B to 1B or smaller).
+
+
+
+**流行的模型自适应方法及目标**
+1. **微调**
+   - 预训练模型：可调
+   - 输入文本
+2. **提示设计**
+   - 预训练模型：冻结
+   - 工程化提示
+   - 输入文本
+3. **提示微调**
+   - 预训练模型：冻结
+   - 可调软提示
+   - 输入文本
+4. **蒸馏**
+   - 预训练模型：提示微调的教师模型
+   - 学生模型
+
+表格细节：
+
+- **如何工作？**
+   - 微调：常规的全模型微调。
+   - 提示设计：无需训练，只需设计输入。
+   - 提示微调：只训练1-100个软标记。
+   - 蒸馏：将大模型蒸馏成小模型。
+
+- **训练数据**
+   - 微调：10k-100k。
+   - 提示设计：1-10个例子（2048个token）。
+   - 提示微调：100-1k个例子。
+   - 蒸馏：100-1k个标注数据，100k-1亿个未标注数据。
+
+- **训练成本**
+   - 微调：成本极高。
+   - 提示设计：零。
+   - 提示微调：平均成本。
+   - 蒸馏：昂贵。
+
+- **训练时间**
+   - 微调：数周/月。
+   - 提示设计：零。
+   - 提示微调：数分钟。
+   - 蒸馏：数天。
+
+- **质量**
+   - 微调：非常高。
+   - 提示设计：高。
+   - 提示微调：非常高。
+   - 蒸馏：非常高（略低于教师模型）。
+
+- **推理成本**
+   - 微调：高。
+   - 提示设计：零样本/少样本情况下推理成本更高（2到5倍）。
+   - 提示微调：高（略高于微调模型）。
+   - 蒸馏：非常低。
+
+- **大语言模型（LLM）大小**
+   - 微调：适用于所有模型，尤其是大模型（大于62B参数）。
+   - 提示设计：大模型（62B+）。
+   - 提示微调：中等规模（例如T5-3B）。
+   - 蒸馏：从大模型蒸馏成小模型（如64B到1B或更小）。
+
+
+
+这张图片展示了四种模型自适应的方法：
+
+1. **微调**：通过使用大量数据对整个模型进行全量微调。这种方法适合大型模型，但训练成本高、时间长，推理时的成本也较高。然而，这种方法的输出质量通常很高，适用于需要极高准确性的场景。
+
+2. **提示设计**：不需要训练模型，而是通过工程化的提示设计来输入特定的例子。这种方法非常适合大模型，成本低，但依赖于高质量的提示设计。
+
+3. **提示微调**：只调整模型中的软提示部分，而保持模型的其他部分冻结。相比于全模型微调，它的训练成本较低，时间短，但仍然能达到非常高的性能，适合中等规模的模型。
+
+4. **蒸馏**：将一个经过提示微调的大模型的知识蒸馏到一个较小的学生模型中。这样可以降低推理成本，并将大模型的能力压缩到一个更小的、性能较低但成本更低的模型中。
+
+这些方法的选择取决于应用场景、资源限制和需要的模型规模。
+
+
+
+## Conventional Fine-tuning
+
+传统微调
+
+![image-20241016182019669](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410161820064.png)
+
+**Conventional Fine-tuning**
+- **Basic steps**:
+  - Get a pretrained model checkpoint (e.g., BERT)
+  - Have a new dataset/task
+  - Do supervised learning on new dataset and update the weights of the new model
+- **Requires**:
+  - Modest amount of compute (e.g., xxx chips for a few days for a 340B model)
+  - In-depth knowledge of the model architecture
+
+The diagram shows an example of fine-tuning using BERT, where specific datasets (like MNLI, NER, SQuAD) are used for tasks, and model weights are adjusted accordingly to perform well on those tasks.
+
+
+
+**传统微调**
+- **基本步骤**：
+  - 获取一个预训练模型的检查点（例如 BERT）
+  - 使用一个新的数据集/任务
+  - 在新的数据集上进行监督学习，并更新新模型的权重
+- **需求**：
+  - 适量的计算资源（例如，使用一些芯片来运行几天以训练一个340B的模型）
+  - 对模型架构的深入了解
+
+该图展示了一个使用BERT进行微调的例子，具体数据集（如MNLI、NER、SQuAD）用于不同任务，并通过调整模型权重使其在这些任务上表现良好。
+
+
+
+这张图片展示了传统微调（Fine-tuning）的流程。传统微调的主要目标是利用已经经过预训练的模型（如BERT）来处理新的任务或数据集。预训练模型已经在大量的通用数据上进行了初步训练，它掌握了一些基本的语言模式和知识。通过微调，模型能够通过监督学习在一个特定任务（如自然语言推理、命名实体识别、问答任务等）上进行专门训练，适应具体的应用场景。
+
+微调的基本流程可以分为三个步骤：
+1. 获取预训练模型的检查点，作为微调的基础。
+2. 使用新的数据集或任务进行训练。
+3. 通过监督学习，更新模型的权重，使其能够在新任务上表现得更好。
+
+微调通常需要一定量的计算资源和对模型架构的深入了解。模型的规模越大，训练所需的计算资源越多。例如，使用具有数十亿参数的模型可能需要数天的时间来完成训练。
+
+微调后的模型能够专注于特定任务，并显著提高在这些任务上的表现。
+
+
+
+**微调** 是在深度学习中，特别是自然语言处理领域，一种非常常见且有效的技术。它指的是在预训练模型的基础上，使用特定任务的数据集进行进一步的训练，以使模型更好地适应新的任务。
+
+
+
+BERT是**Bidirectional Encoder Representations from Transformers**的缩写，中文译为“基于Transformer的双向编码器表示”。它是由Google AI团队开发的一种预训练语言模型，在自然语言处理（NLP）领域掀起了巨大的波澜。
+
+‌**BERT和GPT在自然语言处理领域各有优势，目前并没有被淘汰。**‌ BERT（Bidirectional Encoder Representations from Transformers）是由‌[谷歌](https://www.baidu.com/s?wd=谷歌&usm=4&ie=utf-8&rsv_pq=e6d27da600471cb7&oq=bert被gpt淘汰了吗&rsv_t=4df69TCIYsO6WZjoEiaK8Z2yVkFyBNj86EDB5%2FH%2FDrAbBhHSV8Yrh%2B0rLIw&sa=re_dqa_generate)开发的一种预训练模型，它通过双向训练的方式，能够更好地理解上下文信息，因此在理解文本的语义和含义方面表现出色。BERT在处理需要深入理解文本内容的任务时，如情感分析、文本分类等，表现出色。GPT（Generative Pre-trained Transformer）则是由‌[OpenAI](https://www.baidu.com/s?wd=OpenAI&usm=4&ie=utf-8&rsv_pq=e6d27da600471cb7&oq=bert被gpt淘汰了吗&rsv_t=899124ZhA0PTDVWq6rtUHSOQds6WXFnGXMvLE5AQzdbnIiSwc%2FgGc0B6IzM&sa=re_dqa_generate)开发的一种生成式预训练模型，它通过单向训练的方式，能够生成连贯的文本。GPT在生成式任务中表现出色，如文本生成、对话系统等。由于其强大的生成能力，GPT在需要创造性输出的任务中非常有用。
+
+
+
+**双向编码器**是一种在自然语言处理（NLP）中广泛使用的技术，它能够同时考虑一个词语在其上下文中前后两个方向的信息。简单来说，就是让模型在处理某个词语时，不仅能看到它前面的词语，还能看到它后面的词语，从而更准确地理解这个词语的含义。
+
+
+
+## Concentional Prompt Tuning
+
+传统的提示调优
+
+![image-20241016183022732](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410161830994.png)
+
+**Conventional Prompt Tuning**
+
+- **Basic steps**:
+  - Freeze the backbone model.
+  - Prepend a soft prompt (e.g., learnable) to the input.
+  - Only optimize the prompt to adapt to downstream tasks.
+
+In the diagram, different task prompts are combined into a mixed-task batch, and only the prompt parameters (with 82K parameters each) are tuned while the large pre-trained model (with 11 billion parameters) remains frozen.
+
+
+
+**传统的提示调优**
+
+- **基本步骤**：
+  - 冻结主干模型。
+  - 在输入前添加一个软提示（例如，可学习的提示）。
+  - 仅优化提示，以适应下游任务。
+
+在图表中，不同的任务提示被组合成一个混合任务批次，只有提示参数（每个提示有82K个参数）被调整，而大型预训练模型（拥有110亿个参数）保持冻结状态。
+
+
+
+这张图片展示了提示调优（Prompt Tuning）的基本流程。在提示调优中，预训练的大型语言模型（例如，包含110亿参数的模型）不需要更新其权重，而是通过引入一个软提示进行微调。这个软提示会作为输入的一部分，在与任务相关的数据集上进行训练。
+
+提示调优的关键步骤如下：
+1. 冻结预训练模型的所有参数，使其保持原有状态，不再参与训练。
+2. 为每个具体任务创建一个软提示（Soft Prompt），并将其附加在模型输入之前。这个提示是可学习的，意味着可以在训练过程中进行调整。
+3. 仅对软提示的参数进行优化，以便模型能够更好地执行特定的下游任务（如分类、生成等任务）。
+
+提示调优的优势在于，它极大地减少了需要训练的参数数量（只需调整提示的82K参数，而不是整个模型的110亿参数），因此计算资源和时间成本较低。这种方法在处理不同任务时能够提供高效的调整方式，而不需要对整个模型进行重新训练。
+
+
+
+**提示调优**，简单来说就是通过精心设计输入的提示（Prompt），来引导语言模型生成更符合我们期望的输出。它有点像在和语言模型玩一个“猜谜游戏”，你给它一个提示，它根据提示来生成答案。
+
+特征：		提示调优	微调
+
+修改对象：	提示		模型参数
+
+**软提示** 是一种通过在输入中添加可学习的连续向量来引导大型语言模型（LLM）生成特定输出的技术。简单来说，就是给模型提供一些额外的信息，让它知道我们想要它生成什么样的文本。
+
+硬提示：通常是人工设计的、离散的文本片段，例如：“翻译成中文：”，或者“写一首关于爱情的诗”。硬提示更直观，但灵活性较差。
+
+软提示：是一组连续的向量，这些向量是模型的一部分，可以随着模型的训练而更新。软提示更灵活，可以通过学习适应不同的任务和数据。
+
+工作原理：
+
+1. 初始化： 在模型的输入部分添加一个可学习的向量序列，作为软提示。
+2. 训练： 在训练过程中，软提示的向量会随着模型的训练不断更新，从而更好地引导模型生成我们想要的输出。
+3. 推理： 在推理阶段，将软提示与输入文本一起输入到模型中，模型就会根据软提示和输入文本生成相应的输出。
+
+
+
+## Overview of Prompting
+
+**提示学习概述**
+
+![image-20241016185052052](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410161850351.png)
+
+
+
+**Overview of Prompting**
+
+- **In-context learning**: an LLM (Large Language Model) is given a prompt including a few training examples and a test instance as input.
+- By leveraging its **autoregressive power**, LLMs understand and learn from the in-context examples to generate the output for the test instance directly, without any update to its parameters.
+- Perform in a **zero-shot/few-shot** manner.
+- Context learning is one of the most common ways to use giant LLMs.
+
+**Advantages**:
+- No training, only inference
+- Enables real-time interaction (e.g., ChatGPT)
+- Lowered requirements on training dataset size or label cost: only a few examples (<10) are enough
+- Better generalization and less likely to overfit on the training data
+
+In the diagram, there are examples showing **Zero-Shot** and **One-Shot** prompting scenarios:
+- **Zero-Shot**: The model receives the following input: 
+  - "The cafeteria had 23 apples. If they used 20 to make lunch and bought 6 more, how many apples do they have?"
+  - The model gives the wrong output: 27.
+- **One-Shot**: The model is first given an example with a different question and the correct answer:
+  - "Roger has 5 tennis balls. He buys 2 more cans of tennis balls. Each can has 3 tennis balls. How many tennis balls does he have now? Answer: 11."
+  - Then, the model is asked the same question about apples again. This time, it gives the correct answer: 9.
+
+
+
+**提示学习概述**
+
+- **上下文学习**：LLM（大型语言模型）在提示中接收一些训练示例和一个测试实例作为输入。
+- 通过利用其**自回归能力**，LLM能够从上下文中的示例中理解和学习，并为测试实例直接生成输出，而无需更新其参数。
+- 以**零样本/少样本**的方式执行。
+- 上下文学习是使用大型LLM的最常见方式之一。
+
+**优势**：
+- 无需训练，仅推理
+- 支持实时交互（例如，ChatGPT）
+- 对训练数据集大小或标签成本的要求降低：只需要几个示例（少于10个）即可
+- 更好的泛化能力，且不容易在训练数据上过拟合
+
+在图示中，展示了**零样本**和**单样本**提示学习场景：
+- **零样本**：模型接收到如下输入：
+  - “餐厅有23个苹果。如果他们用20个来做午餐并买了6个，那么他们还有多少苹果？”
+  - 模型给出了错误答案：27。
+- **单样本**：首先模型获得了一个不同问题的示例及正确答案：
+  - “罗杰有5个网球。他买了2罐网球，每罐有3个网球。他现在有多少个网球？答案：11。”
+  - 接着，模型再次被问及关于苹果的问题。这次，模型给出了正确答案：9。
+
+
+
+这张图片展示了如何通过提示学习使用大型语言模型（LLM）。**提示学习**主要指的是模型在不改变内部参数的前提下，依靠提示信息中的示例进行学习和推理。这种方式非常适合大型预训练模型，因为可以避免重新训练模型，直接在推理阶段进行使用。
+
+通过提示学习，模型可以根据少量甚至是零示例的情况，直接进行推理，通常被称为**零样本**（Zero-Shot）或**少样本**（Few-Shot）学习。这样的方法显著降低了对大规模标注数据的需求，并减少了训练时间。
+
+在图片的例子中，展示了模型在零样本和单样本下的表现对比。在零样本提示下，模型没有示例的指导，容易给出错误答案；但在单样本提示中，模型通过一个示例进行学习，能够更好地理解问题，并给出正确答案。
+
+
+
+**上下文学习（In-Context Learning）**，简单来说，就是通过在模型输入中提供一些示例或提示，让模型能够根据这些示例，快速适应新的任务或领域。这种学习方式不需要对模型进行额外的参数更新，而是通过模型本身的泛化能力来完成。
+
+
+
+**自回归** 在大模型领域，特别是在自然语言处理中，是一个非常重要的概念。它描述了一种模型生成文本的方式：模型在生成下一个词时，会参考之前已经生成的词。
+
+
+
+在传统机器学习中，模型通常需要大量带标签的数据进行训练。然而，在大模型时代，**零样本学习** 和 **少样本学习** 提供了一种全新的思路，使得模型能够在极少甚至没有标注数据的情况下，完成新的任务。
+
+**零样本学习 (Zero-Shot Learning)**
+
+- **定义：** 模型从未见过训练集中的任何关于该类的样本，却能够对该类进行分类或预测。
+- **原理：** 模型通常会学习一个潜在的语义空间，将不同类别的样本映射到这个空间中。通过学习已知类别的属性和关系，模型可以推断出未见过的类别的属性，从而实现对未见过的类别的分类。
+- **举例：** 假设模型训练时只见过猫和狗的图片，现在给模型一张从未见过的老虎的图片，模型也能判断出这是一只猫科动物。
+
+**少样本学习 (Few-Shot Learning)**
+
+- **定义：** 模型仅通过少量标注样本就能快速适应新的任务或类别。
+- **原理：** 少样本学习通常会使用元学习（Meta-Learning）的思想，通过学习如何在少量样本上快速学习的能力，来适应新的任务。
+- **举例：** 给模型提供几个手写数字的样本，模型就能学会识别新的手写数字。
+
+假设我们有一个训练好的模型，它已经学习了猫和狗的各种属性。当我们给它一张老虎的图片时：
+
+1. 模型会提取老虎的图像特征，比如条纹、尖耳朵、大眼睛等。
+2. 模型会将这些特征映射到语义空间中。
+3. 模型会发现老虎的特征与猫的特征有很多相似之处，比如都有尖耳朵、都是肉食动物等。
+4. 因此，模型会推断老虎可能属于猫科动物。
+
+
+
+**语义空间**，简单来说，就是一种将语言中的词语或句子映射到一个数学空间的方法。在这个空间中，相似的词语或句子会彼此靠近，而意思相差较远的词语或句子则会离得较远。
+
+
+
+## What is parameter-efficient fine turning
+
+![image-20241016193115784](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410161931065.png)
+
+
+
+## Why do we need PEFT? Pros and Cons
+
+Parameter-efficient Fine Tuning (PEFT).
+
+**参数高效微调（Parameter-Efficient Fine-Tuning，PEFT）** 是一种在大型预训练模型上进行微调的优化技术。它的核心思想是，通过对模型参数进行精细的调整，而不是对所有参数进行大规模的更新，来达到适应下游任务的目的。
+
+
+
+PEFT主要有以下几种实现方式：
+
+- **LoRA（Low-Rank Adaptation of Large Language Models）：** 在模型的每一层中插入可训练的低秩矩阵，通过对这些矩阵进行更新来实现对模型的微调。
+- **Prefix Tuning：** 在输入序列的前面添加可学习的提示词，通过调整这些提示词来实现对模型的微调。
+- **P-Tuning v2：** 对Prefix Tuning的改进，通过引入连续的提示表示，提高了模型的性能。
+- **Adapter Tuning：** 在模型的每一层中插入一个适配器模块，通过对适配器模块的参数进行更新来实现对模型的微调。
+
+
+
+## LoRA
+
+LoRA的细节、有点、以及被大量使用这一趋势
+
+
+
+Distillation：
+
+## Memory & Compute Efficient LLM
+
+![image-20241016203331149](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410162033472.png)
+
+**Memory & Compute Efficient LLM**
+
+- **Quantization**: Speedup 6B LLM inference by 2x
+- **Retrieval Enhancement**: Model size reduction by 50x in text generation
+- **Side Tuning**: Avoid back-propagating through the backbone model
+- **Distillation**: Model size reduction & performance improvement
+
+**内存与计算高效的大型语言模型（LLM）**
+
+- **量化**：使60亿参数的LLM推理速度提高2倍
+- **检索增强**：在文本生成中将模型大小减少50倍
+- **侧向微调**：避免对主干模型进行反向传播
+- **蒸馏**：减少模型大小并提升性能
+
+
+
+这张图展示了在大型语言模型（LLM）中实现内存和计算高效的几种技术：
+
+1. **量化（Quantization）**：量化技术通过将模型的权重从高精度浮点数（如32位）减少为低精度浮点数或整数（如8位），从而大幅减少模型计算所需的内存和计算资源。在这里，它将60亿参数的模型推理速度提高了2倍。
+
+2. **检索增强（Retrieval Enhancement）**：这一方法通过结合外部的检索模块，减少了模型生成文本时的计算负担，显著降低了模型的参数量。在图中提到，它将文本生成模型的大小减少了50倍。
+
+3. **侧向微调（Side Tuning）**：与传统的微调方式不同，侧向微调不需要对主干模型进行反向传播更新，而是通过添加新的模块来适应新的任务，从而减少训练时间和资源消耗。
+
+4. **蒸馏（Distillation）**：模型蒸馏是一种压缩模型的技术，通过将一个大型模型的知识“蒸馏”到一个较小的模型中，同时保持较高的性能表现。这种技术可以显著减小模型的体积，并提升推理性能。
+
+这些方法的共同点是通过不同的技术手段提高大型模型的计算效率，减少推理时间和内存占用，使得大型模型可以在资源有限的环境下更高效地运行。
+
+
+
+## Key Terms: Teacher and Student Model
+
+"教师"模型可以生成训练标签，因此“学生”模型不需要创建很多标签
+
+![image-20241016205946759](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410162059053.png)
+
+
+
+Grounding：
+
+## Some shortcoming of LLMs when it comes to factuality
+
+大语言模型在事实性方面的短板
+
+LLMs produce output that we can check that it is factually wrong
+
+大语言模型生成的输出可能存在事实错误。
+
+
+
+* LLMs are trained in the past
+    * LLMs data is frozen in past. So it will not know about recent developments or facts.
+* LLMs hallucinate
+    * LLMs are creative by nature. This might result in hallucinations at a significant rate.
+* LLMs cant't cite sources
+    * LLMs are good in reasoning, but less so on quoting which sources they used to come to a conclusion...
+
+大语言模型的训练数据是过时的
+
+- 大语言模型的训练数据是固定的，因此它对最近的发展或事实可能并不了解。
+
+大语言模型会产生幻觉
+
+- 大语言模型具有创造性，这可能会导致幻觉的产生。
+
+大语言模型无法引用来源
+
+- 大语言模型擅长推理，但不太擅长引用用于得出结论的来源。
+
+
+
+**Minimizing hallucinations boils down to solving 3 problems**
+
+* Right context
+* Better models
+* User experience
+
+**减少幻觉归结为解决三个问题**
+
+- 正确的上下文（可以让网络搜索与LLM并行、搜索引擎与广告商的私人数据结合）
+- 更好的模型
+- 用户体验
+
+
+
+**幻觉** 在大语言模型中指的是模型生成的内容与实际情况不符，或者说，模型“编造”了不存在的事实。为了减少这种现象，研究人员认为主要有三个方面需要改进：
+
+1. **正确的上下文：**
+    - **问题：** 幻觉常常发生在模型对问题的理解不够准确的情况下。
+    - **解决方案：** 需要为模型提供更准确、更完整的上下文信息，以便它能更好地理解用户的问题，从而生成更准确的答案。例如，提供问题的背景信息、限定问题的范围等。
+2. **更好的模型：**
+    - **问题：** 模型本身的局限性可能导致幻觉。
+    - **解决方案：** 需要开发更强大的模型架构，采用更好的训练方法，并使用高质量的训练数据。例如，引入更多的知识图谱、提高模型的推理能力等。
+3. **用户体验：**
+    - **问题：** 用户的提问方式、表达习惯等都会影响模型的理解和生成。
+    - **解决方案：** 需要设计更好的用户交互界面，引导用户更准确地表达需求。同时，可以提供一些反馈机制，让用户能够对模型生成的答案进行评价，从而帮助模型不断改进。
+
+
+
+## Right context
+
+![image-20241016212652846](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410162126203.png)
+
+**私有文档：** 指的是模型在训练时未曾接触过的、具有私密性的文档。
+
+**新鲜内容：** 指的是来自网络的最新、最及时的数据。
+
+**权威内容：** 指的是来自权威机构或可靠来源的数据。
+
+
+
+![image-20241016212925111](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410162129372.png)
+
+**Retrieve and Generate (RAG)**
+
+- **Retrieval Service**
+    - 1: Retrieve (search results)
+- **Retrieve Augment Generate (RAG)** 
+    - 2: Augment
+    - 3: Generate
+- **LLM** (Large Language Model)
+- **Prompt**
+- **Response**
+
+
+
+**检索与生成 (RAG)**
+
+- **检索服务**
+    - 1: 检索（搜索结果）
+- **检索增强生成 (RAG)**
+    - 2: 增强
+    - 3: 生成
+- **大型语言模型 (LLM)**
+- **提示**
+- **响应**
+
+
+
+这张图展示了 RAG（检索-增强-生成）系统的工作流程。
+
+1. **Prompt（提示）**：用户输入提示或问题，作为初始查询。
+  
+2. **Retrieval Service（检索服务）**：系统通过检索模块从外部数据源（如文档、知识库或网络）中获取与提示相关的信息。这一步称为“检索”，会返回相关的搜索结果。
+
+3. **Retrieve Augment Generate（检索-增强-生成）**：
+   - **Retrieve（检索）**：先获取外部的相关信息（如搜索结果）。
+   - **Augment（增强）**：将检索到的信息与提示结合，增强模型的输入，以提高生成质量。
+   - **Generate（生成）**：大型语言模型（LLM）结合增强后的信息生成最终的答案或响应。
+
+4. **LLM（大型语言模型）**：在此过程中，LLM利用其语言理解和生成能力，结合检索到的信息来创建合理的响应。
+
+5. **Response（响应）**：最终，系统生成的结果作为对用户问题的回答或回应。
+
+**解释：**
+RAG是结合检索和生成的一种架构。与单纯依赖生成模型不同，它通过在生成前先检索相关信息来增强生成的准确性。这种方法特别适用于需要引用外部知识库进行回答的复杂问题。例如，它在需要实时更新的信息（如新闻或学术文献）或回答涉及外部知识库的情况下非常有效。
+
+
+
+## Typical RAG/NLI based grounding architecture in a nutshell
+
+![image-20241016214109906](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410162141229.png)
+
+**Typical RAG/NLI based grounding architecture in a nutshell**
+
+- **Pre-hoc**  
+    - Prompt → Prompt2Query → Retrieval & Ranking → Extractive answer (snippets) → LLM → Response
+- **Post-hoc**
+    - Grounding Detection using NLI
+    - Report:  
+        sent 1, score, citations  
+        ...  
+        sent n, score, citations
+
+---
+
+**[Pre-hoc] Response generation:**
+- Augment input with search results ("Retrieve Augment Generate" approach)
+- LORA/fine-tune model to ground in pre-hoc input and generate citations
+
+**[Post-hoc] Response corroboration:**
+- Use Natural Language Inference to corroborate against corpus and generate/validate citations
+
+
+
+**典型的基于RAG/NLI的基础架构概述**
+
+- **预处理阶段 (Pre-hoc)**  
+    - 提示 → 提示转查询 → 检索与排序 → 抽取式回答（片段）→ 大型语言模型 (LLM) → 响应
+- **后处理阶段 (Post-hoc)**  
+    - 使用自然语言推理 (NLI) 进行基础验证
+    - 报告：  
+        句子1，得分，引用  
+        ...  
+        句子n，得分，引用
+
+**[预处理] 响应生成：**
+- 使用搜索结果增强输入（"检索-增强-生成" 方法）
+- 通过 LORA 或微调模型在预处理输入上进行基础验证并生成引用
+
+**[后处理] 响应验证：**
+- 使用自然语言推理 (NLI) 根据语料库进行验证并生成/验证引用
+
+
+
+这个图展示了典型的基于 **RAG（Retrieve Augment Generate，检索增强生成）** 和 **NLI（Natural Language Inference，自然语言推理）** 的基础架构，用于生成和验证响应。架构分为两个主要阶段：**Pre-hoc**（预处理）和 **Post-hoc**（后处理）。
+
+1. **Pre-hoc（预处理阶段）**：
+   - **Prompt2Query（提示转查询）**：用户输入的提示首先被转换成查询。
+   - **Retrieval & Ranking（检索与排序）**：查询通过检索模块获取相关的搜索结果，并根据相关性进行排序。
+   - **Extractive Answer（抽取式回答）**：从检索结果中提取出相关的内容片段，作为后续生成响应的基础。
+   - **LLM（大型语言模型）**：语言模型基于提取到的片段生成最终的响应。
+
+2. **Post-hoc（后处理阶段）**：
+   - **Grounding Detection using NLI（使用自然语言推理进行基础验证）**：生成的响应通过自然语言推理模型进行验证，确保响应中的信息有据可依，并生成验证报告。
+   - **Report（报告）**：每个句子都会有一个验证得分，并且列出该句子的引用来源。
+
+3. **LORA/微调模型**：LORA（Low-Rank Adaptation of Large Language Models）用于微调模型，确保模型在生成响应时能够进行准确的引用和验证。
+
+4. **自然语言推理（NLI）**：在后处理阶段，NLI用于对生成的响应进行验证，确保它们的准确性，并生成相应的引用。
+
+这套架构的目的是在生成响应的过程中，确保响应不仅仅是生成语言的结果，还能够在信息的来源和可靠性上进行验证，特别适合于需要高可信度回答的场景。
+
+
+
+## Better models
+
+**Better models**
+
+How did we do this?
+
+- Reinforcement learning with human and AI feedback
+- Design reward model to highly punish ungrounded responses in addition to valuing helpfulness
+- Create realistic high-quality training data
+
+Impact: -81% hallucinations vs GPT40
+
+**更好的模型**
+
+我们是如何做到的？
+
+- 人工智能反馈强化学习
+- 设计奖励模型，除了重视帮助性之外，还对无依据的回答进行严厉惩罚
+- 创建逼真的高质量训练数据
+
+效果：与GPT-40相比，幻觉减少了81%
+
+
+
+## User Experience
+
+
+
+## How Function Calling works
+
+1. Define your functions
+2. Wrap functions in a tool
+3. Call Gemini with a tools argument
+
+1. 定义你的函数
+
+2. 将函数封装到一个工具中
+3. 使用`tools`参数调用Gemini
+
+
+
+## A day in the life of a Function Call
+
+![image-20241016215642093](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410162156416.png)
+
+**A day in the life of a Function Call**
+
+1. **Send prompt**
+    - Prompt → Gemini → Response (User interaction)
+   
+2. **Gemini selects function and parameters**
+    - Tool  
+    - Function(s)  
+
+3. **API calls to external systems**
+    - REST APIs  
+    - Databases  
+    - Document Repositories  
+    - Customer management systems  
+
+4. **Respond to user**
+
+**一次函数调用的一天**
+
+1. **发送提示**
+    - 提示 → Gemini → 响应（用户交互）
+   
+2. **Gemini 选择函数和参数**
+    - 工具  
+    - 函数（多个）
+
+3. **API 调用外部系统**
+    - REST APIs  
+    - 数据库  
+    - 文档存储库  
+    - 客户管理系统  
+
+4. **响应用户**
+
+
+
+这个图片展示了一个典型的函数调用流程，特别是在 **Gemini** 系统中，如何通过多个步骤处理用户输入并与外部系统交互，最终生成响应。
+
+1. **用户输入（Send prompt）**：
+   - 用户通过提示输入需求，Gemini 作为中间层接收提示，并最终给出相应的反馈或响应。Gemini 在这个过程中充当了与系统和用户交互的接口。
+   
+2. **Gemini 选择函数和参数**：
+   - 在接收到提示后，Gemini 根据需求选择适当的工具和函数来处理输入。这个选择过程可以包括多个函数的调用，以完成复杂的任务。
+   
+3. **与外部系统的API调用**：
+   - 当选择的函数需要获取外部数据时，Gemini 通过API调用来连接各种外部系统，如 **REST APIs**、数据库、文档存储库，以及客户管理系统。这些系统提供了响应所需的数据或服务。
+   
+4. **响应用户**：
+   - 最终，处理过的数据和外部资源整合后，系统返回一个完整的响应给用户。
+
+这个流程展示了一个基于函数调用架构的系统如何协调内部工具和外部系统，来满足用户的需求。在现实中，这种架构适用于复杂任务，如自动化工作流程、数据处理，以及客户关系管理系统中的多步骤交互。  
+
+
+
+## Function calling is all about developer control and flexibility
+
+* Structured outputs
+* Real-time information retrieval
+* Employee search tool
+* Customer support agent
+* Autonomous workflows
+
+函数调用关乎开发者对模型的控制力和灵活性
+
+- 结构化输出
+- 实时信息检索
+- 员工搜索工具
+- 客户支持代理
+- 自主工作流
+
+
+
+最后讲大模型评估也是很重要的工作
+
+AI是很大的风口
+
+学习要保持创造力是很重要的
+
+
+# 未完待续。。。
