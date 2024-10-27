@@ -3126,6 +3126,9 @@ AI是很大的风口
 
 学习要保持创造力是很重要的
 
+
+
+
 # Lecture 5, Omar Khattab
 
 **Compound AI Systems & DSPy**
@@ -3536,7 +3539,7 @@ data science python
 
 ## As an example, let’s say we wanted to build this pipeline for multi-hop retrieval-augmented generation.
 
-![image-20241026230818626](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410262308009.png)
+![image-20241027100152255](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410271001552.png)
 
 
 
@@ -3622,7 +3625,7 @@ Instead of tweaking brittle prompts
 
 DSPy 优化器在调整程序中的提示和权重方面有多种方法，但总体上通常会..
 
-![image-20241027004417809](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410270044192.png)
+![image-20241027100114087](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410271001417.png)
 
 *DSPy Optimizers vary in how they tune the prompts & weights in your program, but at a high level they typically...*
 
@@ -3666,6 +3669,12 @@ works well in practice & has enable many SoTA systems
 
 
 接下来是讲论文：[Optimizing Instructions and Demonstrations for Multi-Stage Language Model Programs](https://arxiv.org/pdf/2406.11695)
+
+
+
+# Lecture 6, Graham Neubig
+
+Agent for Software Development
 
 
 
