@@ -3126,5 +3126,547 @@ AI是很大的风口
 
 学习要保持创造力是很重要的
 
+# Lecture 5, Omar Khattab
+
+**Compound AI Systems & DSPy**
+
+Compound AI Systems **复合式人工智能系统**
+
+**Compound AI Systems** 是一种结合多个 AI 模型和模块的架构，旨在分解复杂任务并提高系统整体的性能。与单一模型不同，Compound AI 系统将不同能力的模块化组件组合在一起，以实现更强大的信息处理和生成能力。这种系统的基本原理是“分而治之”，即将一个复杂的任务拆分为若干子任务，每个子任务由专门的模型模块处理，最后将各模块的输出进行整合，得到最终结果。例如，在复杂的问答系统中，可以采用一个模块进行检索，另一个模块进行信息过滤，再由生成模块生成最终的答案。这样的架构可以提高响应的准确性和信息的相关性，同时避免单一模型可能带来的局限性。
+
+Compound AI 系统的优势在于其高度的灵活性和可扩展性，可以根据任务需求和实际应用场景进行不同模块的组合。此外，它还支持跨领域的任务处理，因为各个模块可以独立更新和优化，从而适应不同的任务需求。
+
+DSPy
+
+**DSPy** 是斯坦福大学推出的一个编程框架，旨在简化和优化大语言模型（LLM）的调用过程。DSPy 的核心是采用**声明式编程（Declarative Programming）**，通过定义任务目标和优化指标，而不是手工编写提示（prompts），实现对 LLM 的控制。DSPy 编译这些声明性的语言模型调用，并将其转化为自我优化的流水线，使得 LLM 的行为更加稳定和可预测。
+
+
+
+
+
+大致主题（主讲DSPy）：
+
+It's never been easier to build realy impressive AI demos.
+
+现在构建令人印象深刻的AI演示从未如此简单。
+
+Turning monolithic LMs into reliable systems remains challenging.
+
+将单一的大型语言模型转化为可靠的系统依然具有挑战性。
+
+
+
+## 提到的
+
+| 项目        | 相关                                                         |
+| ----------- | ------------------------------------------------------------ |
+| DSPy        | 很多：https://github.com/stanfordnlp/dspy                    |
+| DrQA        | Reading Wikipedia to Answer Open-Domain Questions            |
+| ORQA        | Latent Retrieval for Weakly Supervised Open Domain QA        |
+| RAG         | Retrieval-Augmented Generation for Knowledge-Intensive NLP   |
+| ColBERT-QA  | ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT |
+| GoldEn      | Answering Complex Open-Domain Questions Through Iterative Query Generation |
+| DecompRC    | Multi-hop Reading Comprehension through Question Decomposition and Rescoring |
+| MDR         | Multi-Hop Dense Retrieval for Open-Domain Question Answering |
+| Baleen      | Baleen: Robust Multi-Hop Retrieval Augmented Generation      |
+| STORM       | Assisting in Writing Wikipedia-like Articles From Scratch with Large Language Models |
+| AlphaCodium | Code Generation with AlphaCodium: From Prompt Engineering to Flow Engineering |
+| DIN-SQL     | DIN-SQL: Decomposed In-Context Learning of Text-to-SQL with Self-Correction |
+| RARR        | RARR: Researching and Revising What Language Models Say, Using Language Models |
+| MIPRO       | Optimizing Instructions and Demonstrations for Multi-Stage Language Model Programs |
+|             | Fine-Tuning and Prompt Optimization: Two Great Steps that Work Better Together |
+| IReRa       | In-Context Learning for Extreme Multi-Label Classification   |
+| STORM       | Assisting in Writing Wikipedia-like Articles From Scratch with Large Language Models |
+| ECG-Chat    | ECG-Chat: A Large ECG-Language Model for Cardiac Disease Diagnosis |
+
+
+
+## Every AI system will make mistakes.
+
+But the **monlithic nature** of LMs makes them hard to control, debug, and improve.
+
+语言模型的整体性
+
+但大型语言模型的**单一性**使得它们难以控制、调试和改进。
+
+
+
+To tackle this, AI researchers increasingly **build Compound AI Systems**(modular programs that use LMs as specialized components)
+
+复合人工智能系统  语言模型在其中扮演模块化角色
+
+为了解决这个问题，AI研究人员越来越多地**构建复合AI系统**（一种将大型语言模型作为专业组件使用的模块化程序）。
+
+
+
+## Compound AI Systems：
+
+复合AI系统
+
+“复合AI系统”是指一种将多个独立的AI模块组合在一起工作的系统结构，每个模块负责特定的任务。这些模块通常包括大型语言模型（如GPT-4）等，但还可以结合其他类型的模型或工具，比如计算模块、知识库、自然语言处理单元等。通过这样的模块化设计，复合AI系统能够分工明确、更加灵活地应对复杂任务。
+
+在复合AI系统中，大型语言模型（LM）通常作为其中的“组件”之一，只处理特定的生成或分析任务，而不再作为唯一的决策来源。这种方式允许系统在遇到不同类型的需求时调用合适的模块进行处理，从而有效地提升了系统的可控性和可靠性。
+
+
+
+Transparency、Efficiency、Control、Quality、Inference-time Scaling
+
+透明性、效率、控制、质量、推理时间扩展
+
+
+
+### 例1
+
+例子：RAG:  Retrieval-Augmented Generation 检索增强生成：是一种结合了信息检索（Retrieval）和生成模型（Generation）的方法，用于提升大语言模型在特定任务上的准确性和知识性。其核心思想是将生成模型与信息检索系统结合，以生成更可靠的答案。具体来说，RAG先通过检索模块从外部知识库（如Wikipedia、数据库、文档集合等）中提取相关信息，再将这些信息作为上下文输入到生成模型中，帮助生成模型回答问题或完成任务。这种方法使模型能够更好地处理需要精确信息的任务，减少生成虚假信息（hallucination）的概率。
+
+
+
+![image-20241026181615032](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410261816379.png)
+
+1. **Transparency**: can debug traces & offer user-facing attribution  
+2. **Efficiency**: can use smaller LMs, offloading knowledge & control flow  
+
+3. **透明性**：可以调试跟踪记录并提供面向用户的归因信息  
+4. **效率**：可以使用更小的语言模型，分担知识和控制流程  
+
+
+
+1. **透明性（Transparency）**：
+    - 在复合AI系统中，各模块（如检索器和语言模型）各自承担不同的任务，使得调试过程更加清晰。通过跟踪和分析各模块的行为，开发人员可以更容易地识别问题来源，调试过程也更加透明。
+    - 此外，系统能够提供“面向用户的归因”，即解释答案的来源或过程。这使用户可以理解系统是如何得出结论的，从而增加了信任度。
+
+2. **效率（Efficiency）**：
+    - 复合AI系统可以使用更小的语言模型，因为部分知识处理任务已被分担到其他模块（如知识检索器）上。这样，系统不需要一个大型、通用的模型来解决所有问题，而是通过协作完成任务。
+    - 这种方法能够减少计算资源的需求，提高系统的运行效率，同时更容易进行控制流程管理，便于在复杂环境中实施和优化系统。
+
+
+
+### 例2
+
+例子：Multi-Hop Retrieval-Augmented Generation **多跳检索增强生成**：则是RAG的一种增强形式，专注于多跳检索任务。在多跳任务中，模型需要多次检索信息，并将各次检索的结果串联，才能找到完整的答案。例如，若要回答“哪位美国总统签署了某项特定法案？”这类问题，模型可能首先需要检索出该法案的内容，然后再检索与该法案有关的历史信息，以找出签署总统的名字。因此，Multi-Hop RAG中的检索过程是分步进行的，模型依次执行多个检索步骤，逐层构建信息链，以得到更全面、上下文完整的回答。
+
+![image-20241026182924637](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410261829013.png)
+
+1. **输入**：表示在检索系统的第一步输入的初始查询或数据，标记为 \( t = 1 \)。
+2. **查询**：最初的查询被处理并转换为 \( Q_{t-1} \)，用于在后续步骤中检索相关信息的形式。
+3. **FLIPR检索器**：一个使用 **FLIPR索引** 的检索模型，根据查询 \( Q_{t-1} \) 搜索相关段落或文档。
+4. **Top-K段落**：FLIPR检索器根据查询返回与之最相关的 \( K \) 个段落。
+5. **两阶段凝缩器**：该组件从 Top-K 段落中提取关键信息，生成 **凝缩事实**。
+6. **更新查询 \( Q_t \)**：基于凝缩的事实，对查询进行更新，以进一步优化信息搜索或朝最终答案更接近。
+7. **完成？**：该决策点用于判断是否已经达到最终的迭代次数 \( t = T \)。如果没有，则循环回去进一步优化查询。
+8. **任务特定读取器**：一旦查询处理完成，任务特定读取器解读优化后的信息并生成 **预测结果**。
+
+该图示描述了一种基于迭代查询更新的多跳检索（multi-hop retrieval）模型流程，用于在庞大的信息库中获取精准答案。这种系统的核心是通过不断更新和优化查询，使得模型在每次迭代中能找到更准确的相关信息。具体来说：
+
+- 初始查询进入系统，通过 FLIPR 检索器查询 FLIPR 索引库，得到 Top-K 最相关的段落。
+- 接着，两阶段凝缩器对这些段落进行信息提炼，去除冗余，保留关键事实。这一阶段生成的凝缩事实用于更新查询。
+- 然后，系统判断是否已经达到了预设的迭代次数，未达到则循环以更新的查询再进行检索。
+- 最终，当迭代完成后，任务特定读取器对最终获得的信息进行分析，并生成预测结果，作为系统输出。
+
+这种方法在需要多次信息检索和整合的任务中尤其有效，如问答系统中的复杂问题解析，通过多次检索和信息整合提高准确性和答案的全面性。
+
+
+
+**Control**: can iteratively improve the system & ground it via tools
+
+**控制**：可以通过工具迭代性地改进系统并将其扎根
+
+
+
+### 例3
+
+例子：Compositional Report Generation
+
+1. **Retrieval-Augmented Generation（RAG，检索增强生成）**
+
+Retrieval-Augmented Generation 是一种结合信息检索和文本生成的技术框架。基本思路是先从外部知识库中检索到与输入查询相关的文本片段（即“检索”），然后在这些检索到的内容基础上生成回答或完成指定的任务（即“生成”）。这种方法特别适用于需要外部知识支持的生成任务，比如回答事实性问题、生成内容密集的文本等。
+
+* **应用优势**：相较于仅依靠模型内部记忆的生成方法，RAG通过实时检索，能够动态访问更新的外部信息库，确保输出的准确性和实时性。典型的应用场景包括问答系统、文本摘要、客户支持等需要外部知识支撑的任务。
+
+2. **Multi-Hop Retrieval-Augmented Generation（多跳检索增强生成）**
+
+Multi-Hop Retrieval-Augmented Generation 是对RAG的进一步扩展，涉及**多次（多跳）检索和生成**。与单次检索不同，多跳检索能够处理复杂的、多步推理问题。例如，一个查询可能需要先找到第一层相关信息，再利用这些信息检索出更深层次的关联内容，从而多次迭代检索，最终生成综合性的答案。
+
+* **应用场景**：多跳检索增强生成适用于需要跨越多个信息来源，或通过多个推理步骤才能得到最终答案的问题。这在复杂问答、学术搜索和多层推理的知识图谱生成等领域有广泛应用。
+
+3. **Compositional Report Generation（组合式报告生成）**
+
+Compositional Report Generation 是一种面向任务的生成技术，旨在**生成结构化的报告或文档**。它通常将生成过程分为多个组成部分，每个部分独立生成特定的信息块，最后组合成完整的报告。例如，在生成一份医疗报告时，可以先生成病人的背景信息、接着生成诊断结果、然后生成治疗建议，最后将所有模块组合成完整报告。
+
+* **技术优势**：这种生成方式能够更好地控制生成内容的结构和信息质量，避免传统生成模型可能带来的逻辑不连贯和内容缺失的问题。尤其在对信息完整性和逻辑清晰度要求较高的场景中（如金融报告、医学报告、法律文件生成等），组合式生成可以确保报告的专业性和条理性。
+
+
+
+**RAG** 更强调通过检索增强生成的知识基础；
+
+**Multi-Hop RAG** 在RAG的基础上引入多步推理，适应复杂逻辑问题；
+
+**Compositional Report Generation** 则通过模块化生成确保文本的结构和逻辑性，特别适合生成高度结构化的文本。
+
+
+
+![image-20241026185710137](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410261857467.png)
+
+1. **主题 \( t \) 调查**：通过 **ColBERT 检索器** 开始对主题 \( t \) 的调查，收集相关文章。
+2. **识别观点**：识别多个观点 \( P \)，以覆盖主题的不同角度。
+3. **阅读与提问**：Wikipedia Writer 机器人与这些观点互动，通过阅读和提问来添加具体的视角。
+4. **专家咨询**：Expert 机器人接收问题 \( q \)，将其分解为子问题，进行搜索和筛选，并将信息综合为答案 \( a \)。
+5. **添加可信来源**：从专家的发现中收集可信来源和参考资料。
+6. **草稿大纲 \( O_D \)**：基于收集到的信息和观点直接生成草稿大纲。
+7. **完善**：通过多个对话 \( \{ C_0, ..., C_N \} \) 对草稿进行完善，并整合可信来源以最终完成大纲 \( O \)。
+8. **最终输出**：生成包含参考资料的组织良好的最终大纲。
+
+该流程图描述了一个基于多模块和多代理系统的知识生成过程，特别适用于创建复杂主题的维基百科式内容。系统通过以下步骤实现信息的高效组织与生成：
+
+1. **ColBERT 检索器**：这是一个嵌入检索模型，用于初步筛选与主题相关的内容。这一步确保了信息来源的广泛性和多样性。
+2. **观点识别与添加**：为了确保信息的全面性，系统会识别并添加多种不同视角，以减少偏见。
+3. **专家咨询与问题分解**：专家模块进一步细化问题，将复杂问题分解为多个子问题，分别查找答案并综合，形成更完整的回答。这种多跳检索和生成过程能深入处理复杂的跨领域问题。
+4. **可信来源整合**：系统从多层次的信息中提取可信来源，最终呈现可靠的参考资料。
+5. **草稿生成与完善**：生成一个初步的大纲后，通过多次对话反复优化，确保信息的逻辑性和流畅性。最终输出的内容具有条理清晰、信息全面的特点，适合用于生成正式的百科类文章。
+
+这个系统的设计展示了如何利用不同模块（如检索、专家、生成器）协同工作，以实现高效的多来源信息整合和生成，在自动内容创建和知识管理领域具有广泛的应用潜力。
+
+
+
+**Quality**: more reliable composition of better-scoped LM capabilities
+
+**质量**：更可靠地组合具有更佳范围限定的语言模型能力
+
+这句话强调了在大语言模型（LM）设计和应用中的一个核心目标：**通过更精准的功能范围定义，实现语言模型能力的可靠组合**。其核心思想是将大模型的能力模块化，将每个模块的作用范围或应用场景进行清晰定义，从而在执行具体任务时能够更加精准和高效。
+
+这种更优范围限定的能力组合能够有效减少因模型泛化能力过强导致的误差和偏差。例如，在复杂任务的处理过程中，可以将模型划分为专门负责检索、分析和生成的模块，每个模块都有明确的职责范围，通过精确调控模型的行为来确保输出的稳定性和一致性。这一过程与 DSPy 等框架中的模块化优化思路一致，使得最终的模型在多步骤、多场景任务中表现出更高的质量和可靠性。
+
+
+
+### 例4
+
+AlphaCodium
+
+https://github.com/Codium-ai/AlphaCodium
+
+
+
+![image-20241026212456015](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410262124420.png)
+
+**Pre-processing**
+
+1. **Input - Problem Description + Public Tests**: Start with the problem description and public tests.
+2. **Problem Reflection**: Reflect on the problem to understand requirements.
+3. **Generate Possible Solutions**: Generate potential solutions based on initial insights.
+4. **Public Tests Reasoning**: Use public tests to reason about the solution.
+5. **Generate Additional AI Tests**: Create additional tests to ensure robustness.
+6. **Rank Solutions**: Evaluate and rank the generated solutions based on performance.
+
+**Code Iterations**
+
+1. **Initial Code Solution**: Begin with an initial solution.
+2. **Iterate on Public Tests**: Refine the solution based on feedback from public tests.
+3. **Iterate on AI Tests**: Further refine the solution with AI-generated tests.
+4. **Final Solution**: Arrive at the final, optimized solution.
+
+**SQL Generation**
+
+1. **Schema Linking**: Link relevant database schema for understanding context.
+2. **Classification & Decomposition**: Classify the query as Easy, Nested Complex, or Non-Nested Complex for appropriate handling.
+3. **Self-correction**: Generate the final SQL query and self-correct for accuracy.
+
+**Task-Agnostic Prompting Strategies**
+
+- Strategies include **Best-of-N**, **Chain of Thought**, **Program of Thought**, **ReAct**, **Reflexion**, **Archon**.
+
+
+
+**预处理**
+
+1. **输入 - 问题描述 + 公共测试**：从问题描述和公共测试开始。
+2. **问题反思**：对问题进行反思，理解需求。
+3. **生成可能的解决方案**：基于初步见解生成潜在的解决方案。
+4. **公共测试推理**：利用公共测试对方案进行推理分析。
+5. **生成额外的AI测试**：创建额外的测试以确保方案的稳健性。
+6. **解决方案排序**：基于性能对生成的解决方案进行排序。
+
+**代码迭代**
+
+1. **初始代码方案**：从初始方案开始。
+2. **基于公共测试迭代**：根据公共测试的反馈优化方案。
+3. **基于AI测试迭代**：使用AI生成的测试进一步优化方案。
+4. **最终方案**：得出最终优化的方案。
+
+**SQL生成**
+
+1. **模式链接**：链接相关的数据库模式，以理解上下文。
+2. **分类和分解**：将查询分类为简单、嵌套复杂或非嵌套复杂，以便适当处理。
+3. **自我校正**：生成最终的SQL查询，并进行自我校正以确保准确性。
+
+**任务无关的提示策略**
+
+- 包括 **Best-of-N**、**思维链**（Chain of Thought）、**思维程序**（Program of Thought）、**ReAct**、**Reflexion** 和 **Archon** 等策略。
+
+
+
+这张图展示了一个基于 AI 系统的多阶段问题解决框架，包含从预处理到代码迭代和SQL生成的完整过程。这种框架不仅适用于代码生成，还可以适应不同类型的任务，如数据库查询和自动化问题解决。整体流程分为以下几个部分：
+
+1. **预处理**：从问题描述出发，逐步进行问题反思和初步解决方案的生成。这一阶段通过公共测试和额外的 AI 测试来验证解决方案的可行性，并根据测试结果对方案进行排序，确保初步方案具备较高的可靠性。
+
+2. **代码迭代**：在此阶段，基于公共测试和 AI 测试对初始方案进行多次迭代和优化。最终的解决方案是经过多次反馈校正的结果，力求满足问题的各项需求。
+
+3. **SQL生成**：该部分针对数据库查询任务，分为模式链接、分类分解和自我校正三个步骤，通过理解数据库结构和分解复杂查询，最终生成精确的SQL语句，并进行自我校正以确保输出的准确性。
+
+4. **任务无关的提示策略**：该部分列出了常用的提示策略，包括“最佳N次选择”（Best-of-N）、“思维链”（Chain of Thought）和“ReAct”等。它们可以广泛应用于不同任务中，提高生成内容的质量和准确性。这些策略对复杂任务的解决尤为有用，例如多步骤推理和复杂问题分解。
+
+这个框架展示了如何在复杂任务中结合多种 AI 模块和策略，以实现更加精确和有效的自动化解决方案。
+
+
+
+1. **Best-of-N**
+
+Best-of-N 是一种简单的生成策略，指在执行同一任务时，生成 N 个不同的候选输出，然后从中选择质量最好的一个。通常用于语言模型的生成任务中，通过多次生成避免了单一输出可能带来的质量问题。这种方法的优势在于能够增加生成的多样性，同时确保最终选择的输出更符合任务要求。
+
+2. **思维链（Chain of Thought, CoT）**
+
+思维链（Chain of Thought, CoT）是一种引导语言模型进行多步推理的提示策略。其原理是让模型在回答复杂问题时，逐步展示其推理过程，而不是直接生成最终答案。例如，给出问题后，提示模型按照步骤分解每个逻辑环节，最终生成完整的回答。这种策略适用于需要逻辑推理的任务，如数学问题解答和复杂问答任务，通过清晰的步骤化回答，提升了模型的解释性和准确性。
+
+3. **思维程序（Program of Thought, PoT）**
+
+思维程序（Program of Thought, PoT）是一种扩展的思维链策略，它将复杂任务结构化为更细化的子任务，让模型在多个步骤中解决问题。与思维链不同，PoT 侧重将每一步明确地模块化，类似于编程中的函数调用，使得模型能够通过执行子任务逐步解决整个问题。PoT 适用于结构化较强的任务，例如编程辅助或流程化的操作步骤。
+
+4. **ReAct**
+
+ReAct 是一种结合“反应”（React）和“行动”（Act）的策略，用于任务规划和推理。ReAct 不仅让模型思考下一步该如何回答（反应），还让模型采取行动，例如查询额外信息或调用子模块来辅助完成任务。它在复杂的问答系统中特别有效，能够灵活地根据问题采取不同的行动，从而提高回答的准确性和任务完成度。
+
+5. **Reflexion**
+
+Reflexion 是一种反馈导向的策略，允许模型根据自身生成的初始回答进行自我检查和反思。模型会生成初始答案，然后对其进行自我评估，并通过内置反馈机制判断是否需要修改或完善答案。这种策略在需要高准确性的任务中非常有用，例如诊断类或分析类任务，因为它允许模型自我纠正并迭代改进回答。
+
+6. **Archon**
+
+Archon 是一种结合多种策略的复合框架，允许模型灵活运用多种生成和提示策略来处理任务。例如，Archon 可以在任务开始时使用思维链策略，然后切换到 ReAct 以进行动态调整，最终通过 Reflexion 来完成自我评估。这种组合式的策略框架适用于高度复杂和动态的任务，因为它能够在不同阶段灵活应用最合适的策略，从而提高最终结果的精确度和可靠性。
+
+这些提示策略为大语言模型提供了更灵活和精确的生成方法，尤其在复杂任务、多步骤推理和动态信息需求的场景下表现优异。
+
+
+
+**Inference-time Scaling**: systematically searching for better outputs
+
+**推理时间扩展**：系统地搜索更优输出
+
+“推理时间扩展”指的是在模型推理阶段通过优化方法系统性地探索并生成更高质量的输出。这一方法常用于大语言模型（LLM）或其他深度学习模型中，以在不更改模型结构或参数的情况下，通过不同的推理技巧或调优手段来提高模型的输出质量。这种方法通常包括对不同的生成路径、温度参数调整、采样策略等进行探索，以确保获得最佳的推理结果。
+
+例如，推理时间扩展可能涉及使用**多样化采样**（如调节采样温度和引入随机性），或**选择性筛选**生成的多个候选答案，以挑选出最符合任务需求的输出。通过在推理阶段进行多次生成并评估，这种方法可以显著提升复杂任务的完成度和生成质量。
+
+
+
+
+
+## Unfortunately, LMs are highly sensitive to how they are instructed to solve tasks, so under the hood...
+
+不幸的是，语言模型对任务指令的形式高度敏感，因此在底层的实现上，...
+
+
+
+该句强调了语言模型（LMs）的一个关键特性，即它们对输入指令的格式和措辞极其敏感。这意味着，即使是相似的任务，如果指令表达稍有不同，模型的输出结果可能会有显著差异。这种高度敏感性使得在实际应用中，需要对提示（prompt）进行精细调试和优化，以确保模型能够准确理解并执行任务。
+
+这种现象的根本原因在于模型的预训练过程中，对特定语言模式的偏好会影响它在不同指令下的响应，因此在复杂任务中，指令设计显得尤为重要。
+
+
+
+![image-20241026215522391](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410262155722.png)
+
+**Each "prompt" couples five very different roles:**
+
+1. The core **input → output** behavior, a **Signature**.
+2. The computation specializing an inference-time strategy to the signature, a **Predictor**.
+3. The computation formatting the signature’s inputs and parses its typed outputs, an **Adapter**.
+4. The computations defining objectives and constraints on behavior, **Metrics and Assertions**.
+5. The strings that instruct (or weights that adapt) the LM for desired behavior, an **Optimizer**.
+
+**Existing Compound AI Systems are modular in principle, but are too "stringly-typed": they couple the fundamental system architecture with incidental choices not portable to new LMs, objectives, or pipelines.**
+
+**每个“提示”结合了五种截然不同的角色：**
+
+1. 核心的 **输入→输出** 行为，称为 **签名**。
+2. 专门针对签名的推理时间策略的计算，称为 **预测器**。
+3. 对签名的输入进行格式化并解析其类型化输出的计算，称为 **适配器**。
+4. 定义行为目标和约束的计算，称为 **指标和断言**。
+5. 指导语言模型实现所需行为的指令（或调整权重），称为 **优化器**。
+
+**现有的复合式人工智能系统在原则上是模块化的，但“过于依赖字符串类型”：它们将系统的基础架构与偶然性的选择耦合在一起，难以迁移到新的语言模型、目标或流水线中。**
+
+
+
+该图表描述了一个**复合提示系统**的设计结构，强调每个“提示”在与模型的交互中充当的不同角色。这种结构基于多层次的模块化设计，每个模块承担特定的任务，有助于在复杂 AI 系统中实现更为灵活、可控的模型行为：
+
+1. **Signature（签名）**：代表模型的核心行为，即如何将输入映射到输出。签名是任务的主要定义，它决定了模型的总体目标。
+
+2. **Predictor（预测器）**：这是一个推理模块，在推理阶段选择合适的策略来实现签名的目标。它负责确定如何在实际推理中使用模型的能力。
+
+3. **Adapter（适配器）**：适配器负责格式化输入和输出，将它们转化为模型能够理解和使用的类型化数据。这有助于确保不同类型的数据在进入模型之前被正确地格式化。
+
+4. **Metrics and Assertions（指标和断言）**：这一层定义了对模型行为的目标和约束。通过指标和断言，可以确保模型的行为符合预期的性能要求和质量标准。
+
+5. **Optimizer（优化器）**：优化器的作用是微调提示文本或调整权重，以确保模型按照所期望的方式工作。它通过反馈机制不断调整提示，提高生成结果的质量和准确性。
+
+这种分层设计有助于提高复合 AI 系统的可移植性和模块化，但也指出了当前系统的不足：许多系统过于依赖于具体的提示文本（即“stringly-typed”），导致难以适应不同的模型或任务需求。在实现通用性和灵活性方面，还需要进一步的优化和改进。
+
+
+
+## We know how to build control systems & improve them modularly.
+
+我们知道如何构建控制系统并以模块化方式改进它们。
+
+That is called **programming.**
+
+
+
+What if we could abstract Compound AI Systems as **programs** with fuzzy **natural-language-typed modules** that **learn their behavior**?
+
+如果我们可以将复合式人工智能系统抽象为带有模糊自然语言类型模块的程序，这些模块能够学习它们的行为，该会怎样？ 
+
+这句话设想了一种新的设计方法，探讨是否可以将复合式人工智能系统（Compound AI Systems）视作由**模糊自然语言类型模块**组成的程序。这些模块不仅接受自然语言的描述，还可以通过“学习”来自数据的行为，逐步适应和改进自己的功能。该设想试图通过让各模块在模糊语言描述下自我学习，来提升系统的灵活性和可适应性，最终减少对固定规则或预定义结构的依赖，使得系统更容易适应不同任务和场景的需求。
+
+
+
+## DSPy
+
+data science python
+
+自然语言 -> 自然语言
+
+
+
+## As an example, let’s say we wanted to build this pipeline for multi-hop retrieval-augmented generation.
+
+![image-20241026230818626](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410262308009.png)
+
+
+
+**As an example, let’s say we wanted to build this pipeline for multi-hop retrieval-augmented generation.**
+
+作为一个示例，假设我们想构建这个多跳检索增强生成的流水线。
+
+```python
+def multihop_qa(question: str) -> str:
+    for i in range(2):
+        query = (question, context)
+        context = (query)
+    return (question, context)
+```
+
+图示代码片段定义了一个名为 `multihop_qa` 的函数，用于实现多跳检索增强生成。代码通过一个简单的循环进行两轮迭代，每次迭代中，`query` 会基于当前 `question` 和 `context` 进行更新，而 `context` 也基于 `query` 进行调整，最终返回生成的 `answer`。
+
+
+
+这个图示展示了一个**多跳检索增强生成（Multi-hop Retrieval-Augmented Generation）**的示例实现，用于处理复杂的问答任务。主要原理包括以下几个步骤：
+
+1. **初始化**：函数接受一个 `question` 参数作为初始查询，同时初始化 `context`，用于存储多跳信息。
+2. **多跳迭代**：在循环中，每一跳都会基于 `question` 和 `context` 生成一个新的 `query`，并使用此 `query` 更新 `context`，以便在下一次跳跃中包含之前的知识。
+3. **返回结果**：在完成预定次数的跳跃后，函数返回最终的 `context`，作为对问题的综合回答。
+
+这种多跳检索方法在复杂任务中十分有效，尤其是需要层层递进地获取信息时。通过递归迭代，系统能够逐渐收集并整合所需信息，从而提供更加全面和精准的回答。
+
+
+
+1. **Question（问题）**：`question` 是用户输入的初始问题，通常是多跳检索系统的核心驱动因素。例如，“谁是目前联合国秘书长的前任？”这种问题会触发系统寻找相关信息。`question` 在整个过程中保持不变，是系统回答最终问题的主要依据。
+
+2. **Query（查询）**：`query` 是系统在每个跳跃阶段生成的查询语句。`query` 可以理解为根据当前已知信息生成的“子问题”或“跟进问题”。每一跳中，系统会将 `question` 和当前 `context` 的信息结合起来生成一个新的 `query`，以便在下一次跳跃中查找更具体的信息。例如，在第一跳中，系统可能会查询“联合国秘书长的前任是谁？”，而在接下来的跳跃中，可能会进一步查询这个前任的其他信息。
+
+3. **Context（上下文）**：`context` 是从每次检索中返回的信息，它在每一跳之间传递并更新。`context` 包含从检索模块返回的文本段落或事实信息，为系统的下一步推理和生成提供支持。在每一跳中，`context` 都会结合 `query` 来丰富系统对原始 `question` 的理解，并帮助生成更为准确的回答。通过不断累积 `context`，系统能够在多跳中获取更深层次的信息，以逐步靠近最终答案。
+
+
+
+为什么循环
+
+**递进式信息获取**：复杂问题往往无法通过单次检索直接获得完整答案。第一轮检索可以获取初步的信息，将问题分解为子问题；第二轮则在第一轮获取的上下文基础上进行更深入的查询，从而帮助模型获得更加详尽的背景信息。
+
+**多步推理**：多跳检索的核心目的是模拟人类的多步推理过程。通过每次迭代，系统能够逐步理解问题的深层次含义，并在初步检索的基础上深入挖掘。两次循环可以让系统在首次获取的 `context` 基础上进一步生成新的 `query`，最终得到更精准的答案。
+
+**信息累积与上下文增强**：在多跳系统中，后续的检索可以利用前一轮的 `context` 累积信息，使模型的理解逐步丰富。例如，回答一个需要背景知识的问题时，第一次检索可能仅提供相关人物或事件的初步信息，第二次检索则可以基于这些信息获取更细节的内容，帮助回答更精确的子问题。
+
+
+
+## Anatomy of an LM program in DSPy
+
+DSPy 中语言模型程序的组成剖析
+
+
+
+风格模仿PyTorch
+
+
+
+## How can we translate these into high-quality prompts?
+
+我们该如何将这些内容转化为高质量的提示语？
+
+
+
+First, modules are **translated into basic prompt** using Adapters and Predictors.
+
+首先，模块通过适配器和预测器**转换为基本提示**。
+
+
+
+DSPy’s **Optimizers** can then tune this prompt ... jointly along with all other prompts in your program.
+
+DSPy 的**优化器**随后可以与程序中的其他所有提示一起联合调整该提示。
+
+
+
+Instead of tweaking brittle prompts
+
+不再调整脆弱的提示
+
+
+
+## DSPy Optimizers vary in how they tune the prompts & weights in your program, but at a high level they typically...
+
+DSPy 优化器在调整程序中的提示和权重方面有多种方法，但总体上通常会..
+
+![image-20241027004417809](https://raw.githubusercontent.com/R10836/TyporaImageBox/main/img/202410270044192.png)
+
+*DSPy Optimizers vary in how they tune the prompts & weights in your program, but at a high level they typically...*
+
+1. Construct an **initial prompt** from each module via an **Adapter**
+2. **Generate examples** of every module via rejection sampling
+3. Use the examples to **update the program’s modules**  
+    - a. Automatic few-shot prompting: `dspy.BootstrapFewShotWithRandomSearch`
+    - b. Induction of instructions: `dspy.MIPROv2`
+    - c. Multi-stage fine-tuning: `dspy.BootstrapFinetune`
+
+*DSPy 优化器在调整程序中的提示和权重方面有多种方法，但总体上通常会...*
+
+1. 通过**适配器**从每个模块构建**初始提示**
+2. 使用拒绝采样为每个模块**生成示例**
+3. 使用这些示例来**更新程序的模块**  
+    - a. 自动少样本提示：`dspy.BootstrapFewShotWithRandomSearch`
+    - b. 指令归纳：`dspy.MIPROv2`
+    - c. 多阶段微调：`dspy.BootstrapFinetune`
+
+
+
+这张图片展示了 **DSPy 框架**中优化器（Optimizers）如何在高层次上调整提示（prompts）和权重的流程。该流程主要包含以下步骤：
+
+1. **构建初始提示**：每个模块通过适配器（Adapter）生成一个初始提示，作为任务的起点。这一步是将模块的输入与提示格式进行标准化的关键。
+
+2. **生成示例**：通过拒绝采样（rejection sampling）为每个模块生成一组样本。拒绝采样是一种生成数据的统计方法，用于确保生成的样本符合特定标准，这样可以有效提高模型的精度。
+
+3. **更新模块**：使用生成的样本来对各模块进行更新。这里列出了三种更新策略：
+    - **自动少样本提示**（Automatic few-shot prompting）：通过随机搜索的方法生成少量示例，提升模型在少样本条件下的泛化能力。
+    - **指令归纳**（Induction of instructions）：通过 `dspy.MIPROv2` 进行指令归纳，使得模型能够在学习过程中推理出适当的指令。
+    - **多阶段微调**（Multi-stage fine-tuning）：通过 `dspy.BootstrapFinetune` 进行多阶段的微调，使得模型能够在不同阶段逐步提升性能。
+
+这些步骤的目的在于使模型更好地适应特定任务和输入数据，提高生成输出的准确性和一致性。这种模块化和多层次的优化方法，使得 DSPy 框架在复杂任务中表现更出色，同时也更易于迁移到不同任务和模型。
+
+
+
+## MIPRO
+
+works well in practice & has enable many SoTA systems
+
+
+
+接下来是讲论文：[Optimizing Instructions and Demonstrations for Multi-Stage Language Model Programs](https://arxiv.org/pdf/2406.11695)
+
+
 
 # 未完待续。。。
