@@ -3,6 +3,17 @@ UC Berkeley CS 194/294-196 (LLM Agents) 的简体中文翻译以及笔记。正�
 
 暂时先更新于CSDN专栏：https://blog.csdn.net/bbqbro/category_12800996.html
 
+# 目录
+
+- [预备知识](#预备知识)
+- [Dawn Song 的开场白](#dawn-song-的开场白)
+- [Lecture 1, Denny Zhou](#lecture-1-denny-zhou)
+- [Lecture 2, Shunyu Yao](#lecture-2-shunyu-yao)
+- [Lecture 3, Chi Wang and Jerry Liu](#lecture-3-chi-wang-and-jerry-liu)
+- [Lecture 4, Burak Gokturk](#lecture-4-burak-gokturk)
+- [Lecture 5, Omar Khattab](#lecture-5-omar-khattab)
+- [Lecture 6, Graham Neubig](#lecture-6-graham-neubig)
+- [未完待续](#未完待续)
 
 # 预备知识
 
@@ -3650,4 +3661,4 @@ Agent for Software Development
 
 
 
-# 未完待续。。。
+# 未完待续
