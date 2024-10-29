@@ -1,7 +1,8 @@
 # UCB-CS194/294-196-LLM-Agents-zh
+
 这是 UC Berkeley CS 194/294-196 (LLM Agents) 的简体中文翻译以及笔记。正在更新中，还有很多很多需要完善，打算与课程同步更新，欢迎您的阅读。希望能够得到您宝贵的建议，谢谢。
 
-同时我也在 [CSDN 专栏](https://blog.csdn.net/bbqbro/category_12800996.html)进行更新。
+同时也会在 [CSDN 专栏](https://blog.csdn.net/bbqbro/category_12800996.html)进行更新。
 
 # 目录
 
