@@ -3655,11 +3655,631 @@ works well in practice & has enable many SoTA systems
 
 # Lecture 6, Graham Neubig
 
-Agent for Software Development
+主题
+
+**Agent for Software Development**
+
+**Challenges in Coding Agents** 
+
+
+
+提到的比较重要的：
+
+| 项目/论文                  |      |      |
+| -------------------------- | ---- | ---- |
+| OpenHands                  |      |      |
+| CodeAct                    |      |      |
+| SWE-Agent                  |      |      |
+| The Stack 2                |      |      |
+| Copilot Prompting Strategy |      |      |
+| Agentless                  |      |      |
+| CoAct                      |      |      |
+
+
+
+## Challenges in Coding Agents 
+
+- Defining the Environment
+- Designing an Observations/Actions
+- Code Generation (atomic actions)
+- File Localization (exploration)
+- Planning and Error Recovery
+- Safety
+
+**编写智能体的挑战**
+
+- 定义环境
+- 设计观察/动作
+- 代码生成（原子操作）
+- 文件定位（探索）
+- 规划和错误恢复
+- 安全性
+
+这张幻灯片列出了在开发代码生成智能体（Coding Agents）时需要面对的一些核心挑战：
+
+1. **定义环境**：智能体需要在一个明确定义的环境中运作。定义环境的目的是设定智能体的作用范围和互动对象，以确保其功能的有效性和可靠性。
+
+2. **设计观察/动作**：为智能体设计观察和动作机制十分关键。观察使智能体可以了解环境的状态，而动作则是智能体在环境中采取的步骤和操作。合理的观察和动作设计直接影响智能体的表现和效率。
+
+3. **代码生成（原子操作）**：智能体生成的代码需要精细化到“原子操作”级别，即每一步都是不可再分的最小操作。这种设计有助于提高代码生成的精确度，并减少出错概率。
+
+4. **文件定位（探索）**：智能体需要能够在复杂的文件系统或代码库中定位特定的文件或信息。该能力涉及智能体的探索能力和文件系统的结构化理解。
+
+5. **规划和错误恢复**：智能体在执行任务时可能遇到多种错误，因此需要具有规划能力和错误恢复机制，以确保任务的顺利进行。规划能力允许智能体制定行动步骤，而错误恢复则使其能够在出错时回归正常。
+
+6. **安全性**：确保智能体操作的安全性至关重要，特别是在涉及系统关键文件或重要数据时。
+
+
+
+## Software Development Environments
+
+**Types of Environments**
+
+- Actual Environments:
+    - Source Repositories: Github, Gitlab
+    - Task Management Software: Jira, Linear
+    - Office Software: Google Docs, Microsoft Office
+    - Communication Tools: Gmail, Slack
+
+- Testing Environments:
+    - Mostly focused on coding!
+    - Developers do more, e.g., browse the web (next session)
+
+**环境类型**
+
+- 实际环境：
+    - 源代码库：Github, Gitlab
+    - 任务管理软件：Jira, Linear
+    - 办公软件：Google Docs, Microsoft Office
+    - 通讯工具：Gmail, Slack
+
+- 测试环境：
+    - 主要专注于编码！
+    - 开发者还会进行更多操作，例如浏览网页（下一次讲解）
+
+
+
+这张幻灯片介绍了代码生成智能体（Coding Agents）可能面临的不同工作环境：
+
+1. **实际环境**：指的是开发者日常工作的真实环境。这里列举了四类工具，这些工具构成了开发者日常工作的基础：
+    - **源代码库**：如Github和Gitlab，用于存储和管理代码版本。
+    - **任务管理软件**：如Jira和Linear，帮助团队分配、追踪任务的完成情况。
+    - **办公软件**：如Google Docs和Microsoft Office，用于处理文档、表格等办公事务。
+    - **通讯工具**：如Gmail和Slack，用于团队之间的沟通和交流。
+
+2. **测试环境**：主要指开发者用于测试代码的环境。在这种环境中，开发者主要专注于编码，但也可能需要执行一些额外操作，如浏览网页以获取信息或进行测试。这部分内容将在下一节课继续讨论。
+
+这类区分帮助智能体开发者在构建系统时更有针对性地考虑不同的环境需求。
+
+
+
+## Designing Observations/Actions Spaces
+
+**Coding Agents Must**
+
+- Understand repository structure
+- Read in existing code
+- Modify or produce code
+- Run code and debug
+
+**编码智能体必须**
+
+- 理解代码库结构
+- 读取现有代码
+- 修改或生成代码
+- 运行代码并调试
+
+
+
+这张幻灯片列出了编码智能体（Coding Agents）在执行任务时必须具备的四个关键能力：
+
+1. **理解代码库结构**：智能体需要理解代码库的组织方式，熟悉其中的文件和模块关系，以便在正确的地方执行操作。这种能力有助于智能体在复杂项目中高效导航和操作。
+
+2. **读取现有代码**：智能体应能够理解并读取已有代码。这要求智能体具备代码解析和理解的基本能力，能够识别代码的功能、逻辑以及数据结构。
+
+3. **修改或生成代码**：智能体需要具备修改现有代码或生成新代码的能力。这可能包括添加新功能、修复错误或优化代码性能。
+
+4. **运行代码并调试**：智能体应能够执行代码并进行调试，以确保代码的正确性和功能性。在发现错误时，智能体能够定位并修复问题，从而实现自我完善。
+
+这些能力共同构成了智能体在复杂编程任务中自主运作的基础。
+
+
+
+## Code-based LLMs
+
+**Basic Method: Code-generating LM**
+
+- Feed instructions and/or input code to an LM
+- Virtually all serious LMs are trained on code nowadays, but some are specialized
+
+**基本方法：代码生成语言模型（LM）**
+
+- 向语言模型提供指令和/或输入代码
+- 现今几乎所有高级语言模型都接受过代码训练，但其中一些模型经过了特别优化
+
+
+
+**Method: Code Infilling**  
+(Fried et al. 2022)
+
+- In code generation, we often want to fill in code
+- Solution: train for infilling
+
+**方法：代码填充**  
+(Fried 等，2022)
+
+- 在代码生成中，我们通常需要填充代码
+- 解决方案：训练模型进行填充
+
+
+
+**Method: Long-context Extension**  
+(see Lu et al. 2024)
+
+- In LMs, it is standard to use RoPE, a method for encoding positional information
+- It does not generalize well beyond the training data, but code is long!
+- It has a parameter, typically \( \theta_j = b^{-\frac{2j}{d_k}} \) with \( b=10000 \)
+
+- **Position interpolation**: Multiply \( \theta \) by a constant scaling factor (e.g., \( C_{short}/C_{long} \))
+- **Neural tangent kernel**: Scale low-frequency components, but maintain high-frequency components
+
+**方法：长上下文扩展**  
+（见 Lu 等，2024）
+
+- 在语言模型中，标准做法是使用 RoPE 来编码位置信息
+- RoPE 的泛化能力在训练数据之外表现不佳，但代码文本通常较长！
+- RoPE 有一个参数，通常 \( \theta_j = b^{-\frac{2j}{d_k}} \)，其中 \( b=10000 \)
+
+- **位置插值**：将 \( \theta \) 乘以一个常数缩放因子（例如 \( C_{short}/C_{long} \)）
+- **神经切线核**：缩放低频成分，同时保持高频成分
+
+1. **RoPE 编码位置信息**：RoPE（旋转位置编码）是一种编码位置信息的方法，被广泛用于语言模型，以便模型能够理解输入序列中的位置。然而，RoPE 的泛化能力有限，在超出训练数据范围时效果较差，这对处理长代码文本带来了挑战。
+
+2. **参数设定**：RoPE 包含一个参数 \( \theta_j \)，通常定义为 \( b^{-\frac{2j}{d_k}} \)，其中 \( b \) 是一个较大的常数（如 10000）。这个参数设定可以帮助模型在长文本中更好地捕捉位置信息。
+
+3. **位置插值**：通过将 \( \theta \) 乘以一个常数缩放因子（如 \( C_{short}/C_{long} \)），可以对位置信息进行插值，从而更好地处理不同长度的上下文。
+
+4. **神经切线核**：该方法旨在调整低频和高频成分的比例，缩放低频成分但保留高频成分，以实现更稳定的长上下文建模。
+
+通过这些改进，模型可以在处理长代码文本时表现得更为稳定，从而增强对长上下文的理解和处理能力。
+
+
+
+## Lots of Available Information for Coding
+
+- Current code context
+- Description of issue to fix
+- Repo context
+- Open tabs
+
+**大量可用于coding的信息！**
+
+- 当前代码上下文
+- 待修复问题的描述
+- 代码库上下文
+- 打开的标签页
+
+1. **当前代码上下文**：指的是当前开发人员正在查看或编辑的代码片段以及其上下文。这有助于开发者了解代码的具体功能、变量定义和模块调用情况，从而更准确地进行修改。
+
+2. **待修复问题的描述**：描述问题的详细信息可以帮助开发人员明确修复目标和预期效果。这些信息通常来源于问题追踪工具（如Jira）或注释，能够让开发者更好地理解问题的症结所在。
+
+3. **代码库上下文**：指整个代码库的结构及其模块关系。这类信息有助于开发人员在复杂项目中快速导航，找到相关文件或函数，确保代码改动的连贯性。
+
+4. **打开的标签页**：在开发过程中，开发人员可能打开多个文档、网页或代码文件，这些标签页中包含的信息可能是代码文档、API参考或其他辅助资源，为编码提供了进一步的支持。
+
+
+
+**Example: Copilot Prompting Strategy** (Thakkar 2023)
+
+- Extract prompt given current doc and cursor position
+- Identify relative path and language
+- Find most recently accessed 20 files of the same language
+- Include: text before, text after, similar files, imported files, metadata about language and path
+- TL;DR: lots of prompt engineering to get most useful context in the prompt
+
+**示例：Copilot 提示策略** (Thakkar 2023)
+
+- 根据当前文档和光标位置提取提示
+- 识别相对路径和编程语言
+- 查找最近访问的20个相同语言的文件
+- 包含：前后文本、相似文件、导入文件、关于语言和路径的元数据
+- 总结：大量提示工程以获得提示中的最有用上下文
+
+这张幻灯片介绍了GitHub Copilot的提示策略，用于为生成代码提供更有效的上下文信息：
+
+1. **根据文档和光标位置提取提示**：该策略首先根据当前文档和光标位置提取提示内容，这可以帮助模型了解用户当前的需求和所处的代码位置。
+
+2. **识别相对路径和编程语言**：通过识别当前文件的相对路径和编程语言，模型可以更好地理解代码的上下文环境，尤其是在项目结构复杂时。
+
+3. **查找最近访问的20个相同语言的文件**：该策略还包括查找最近访问的20个相同编程语言的文件，帮助模型获取更多相关代码的上下文，提高生成代码的准确性。
+
+4. **包含相关信息**：在提示中加入前后的代码文本、相似文件、导入的文件以及关于语言和路径的元数据。这些信息为生成代码提供了全面的上下文，有助于模型生成更符合用户需求的代码。
+
+5. **总结**：这是一种复杂的提示工程方法，目的是提供尽可能多的上下文信息，使模型能够在代码补全和生成方面更加准确。
+
+此策略的核心在于通过全面的上下文信息来提升代码生成质量，使得生成的代码与项目中的现有代码风格和逻辑更加一致。
+
+
+
+## File Localization
+
+文件定位
+
+可能是coding智能体面临的最大的问题
+
+
+
+**LLM-based Localization**
+
+- Finding the correct files given user intent
+
+**基于 LLM 的定位**
+
+- 根据用户意图找到正确的文件
+
+
+
+### Solution 1： Offload to the User
+
+**解决方案 1：转交给用户**
+
+- 具有提示和项目经验的用户可以指定使用的文件
+
+
+
+### Solution 2: Prompt the Agent w/ Search Tools
+
+e.g. SWE-agent provides a tool for searching repositories
+
+**解决方案 2：为智能体提供搜索工具**
+
+- 例如，SWE-agent 提供了一个用于搜索代码库的工具
+
+
+
+### Solution 3: A-priori Map the Repo
+
+**Solution 3: A-priori Map the Repo**
+
+- Create a map of the repo and prompt agent with it
+- Aider repomap creates a tree-structured map of the repo
+- Agentless (Xia et al. 2024) does a hierarchical search for every issue
+
+**解决方案 3：先验地映射代码库**
+
+- 创建代码库的映射并将其提供给智能体
+- Aider repomap 创建了代码库的树状结构映射
+- 无代理模型（Xia 等，2024）为每个问题进行分层搜索
+
+该幻灯片提出了一种预先映射代码库的方法，帮助智能体更有效地定位相关文件或代码模块：
+
+1. **代码库映射**：首先为代码库创建一个映射（类似索引结构），并将其提供给智能体。这样智能体在执行特定任务时，能够更快地识别出代码结构和相关的文件位置，避免盲目搜索。
+
+2. **树状结构映射**：通过 Aider repomap 工具，生成代码库的树状结构映射，将代码库按文件夹、类、函数等层级组织起来。这种树状结构有助于直观地展示代码库的组织形式，让智能体可以更系统地理解代码布局。
+
+3. **分层搜索**：无代理模型（Agentless）采用了分层搜索的方式，以更有效地解决特定问题。该方法按照从项目代码库到类和函数、最后到编辑位置的顺序逐层缩小搜索范围，提高了查找效率。
+
+通过这种先验映射的方式，智能体可以快速访问相关文件和模块，并基于结构化的代码库映射更高效地完成任务，尤其适用于大型项目的代码维护和问题修复。
+
+
+
+### Solution 4: Retrieval-augmented Code Generation
+
+**Solution 4: Retrieval-augmented Code Generation**
+
+- Retrieve similar code, and fill it in with a retrieval-augmented LM (Hayati et al. 2018)
+- Particularly, in code there is also documentation, which can be retrieved (Zhou et al. 2022)
+
+> Example: Generate HTML with Python syntax highlighting for `print("reading docs")`
+
+- **Unsolved issue**: when to perform RAG in agent
+
+**解决方案 4：检索增强的代码生成**
+
+- 检索相似代码，并使用检索增强的语言模型进行填充（Hayati 等，2018）
+- 特别是在代码中还有**文档**，这些文档也可以被检索（Zhou 等，2022）
+
+> 示例：为 `print("reading docs")` 生成带有 Python 语法高亮的 HTML
+
+- **未解决的问题**：何时在智能体中执行检索增强生成（RAG）
+
+这张幻灯片介绍了一种通过检索增强（Retrieval-Augmented Generation, RAG）来改进代码生成的方法。
+
+1. **检索相似代码**：智能体首先检索与当前任务或代码片段相似的代码，以便更高效地生成所需代码。这种方法通过利用已有代码库中的内容，减少了从头编写代码的需求。
+
+2. **检索文档**：除了代码片段外，相关的文档（如代码库中关于语法或函数的说明）也可以被检索。这样在生成代码时，智能体能够获取更多的上下文信息，有助于生成更准确的代码。
+
+3. **代码生成示例**：幻灯片中的示例展示了如何通过检索与语法高亮相关的代码片段来生成带有 Python 语法高亮的 HTML 代码。
+
+4. **未解决的问题**：目前尚未解决的一个问题是何时在智能体中执行检索增强生成（RAG）。即在代码生成的过程中，如何判断何时需要调用外部的代码片段或文档，以便最大程度地提高代码生成的准确性和效率。
+
+这种方法有效地将检索和生成结合，使智能体在生成代码时能够更好地利用已有的资源，提高代码生成的效率和准确性。
+
+
+
+## Planning and Error Recovery
+
+规划和错误恢复
+
+
+
+​	硬编码（Hard Coding）指的是在代码中直接写入固定的值或行为，而不是使用可配置的参数、动态输入或外部配置文件。这些值或逻辑在程序运行时是固定的，无法轻易更改。例如，如果在程序中直接写死了一个用户名或文件路径，那么在后续需要修改这些信息时，就必须重新修改代码并重新编译或部署程序。硬编码通常被认为是不好的编程实践，因为它降低了代码的灵活性和可维护性。
+
+**Hard-coded Task Completion Process**
+
+- e.g. Agentless (Xie et al. 2024) has a hard-coded progress of
+    - File Localization
+    - Function Localization
+    - Patch Generation
+    - Patch Application
+
+**硬编码任务完成流程**
+
+- 例如，无代理模型（Xie 等，2024）的硬编码进程包括：
+    - 文件定位
+    - 函数定位
+    - 补丁生成
+    - 补丁应用
+
+这张幻灯片描述了一种硬编码的任务完成流程，用于自动化修复代码的过程。该流程被设计为一组固定的步骤，逐步完成代码的定位、修改和更新：
+
+1. **文件定位**：首先，系统确定需要修改的文件。这一步骤将代码库中相关的文件识别出来，使后续操作可以集中在相关文件上。
+
+2. **函数定位**：在确定文件后，系统进一步定位到具体的函数或代码片段，以便精确地找到需要修改的部分。
+
+3. **补丁生成**：在找到目标代码后，系统生成一个补丁，包含修复代码或功能改进的具体改动。
+
+4. **补丁应用**：最后，系统将生成的补丁应用到代码库中，使修复或改进生效。
+
+该硬编码流程确保了每个步骤的清晰和固定，适合用于特定、重复性的代码修复任务。它提供了自动化的步骤序列，使智能体能够在无需实时决策的情况下逐步完成代码更新。
+
+
+
+**LLM-Generated Plans**
+
+- LLM-generated planning step, then one or more executors
+- CodeR (Chen et al. 2024)
+
+**LLM 生成的计划**
+
+- LLM 生成计划步骤，然后由一个或多个执行者执行
+- CodeR (Chen 等, 2024)
+
+这张幻灯片展示了一个利用大语言模型（LLM）生成计划的框架，并由多个执行者配合完成任务的流程。以下是该框架的具体步骤和执行者角色：
+
+1. **计划生成（Planning Step）**：大语言模型首先分析任务需求，生成一个计划（Task Graph），这个计划包括了如何解决问题的步骤。这里，LLM 扮演了生成计划的角色。
+
+2. **多个执行者的分工**：在这个系统中，执行者被分为多个角色，每个角色负责执行计划中的不同任务。具体包括：
+    - **Manager**：负责分析问题并选择合适的任务分配。
+    - **Reproducer**：根据计划生成或运行 `reproduce.py` 脚本来重现问题，并生成初步报告。
+    - **Fault Localizer**：在 Reproducer 确认问题后，定位问题发生的代码位置。
+    - **Editor**：根据 Fault Localizer 的结果，编辑代码并进行修复。
+    - **Verifier**：验证修复是否成功，并提供反馈。如果修复失败，则返回给 Reproducer 或 Editor。
+
+3. **协作过程**：整个过程中，执行者之间密切协作，通过生成报告和反馈的方式逐步完成问题的解决。任务图（Task Graph）为各角色的工作提供了清晰的流程指导。
+
+4. **CodeR 框架**：CodeR 由 Chen 等人（2024）提出，它利用 LLM 进行问题分析和任务规划，再通过多角色执行计划。这种结构允许复杂任务的分步执行，并确保每个步骤都有明确的负责人，提高了自动化处理问题的效率。
+
+通过这种 LLM 生成计划和多执行者协作的方式，系统可以自动化地完成问题的分析、定位、修复和验证，减少人工干预。
+
+
+
+**Planning and Revisiting**
+
+- CoAct goes back and fixes (Hou et al. 2024)
+
+**计划和复查**
+
+- CoAct 回溯并修复（Hou 等，2024）
+
+该幻灯片介绍了由 Hou 等人在 2024 年提出的 CoAct 框架。该框架的主要特点是结合计划生成和复查机制，用于逐步完成任务并在必要时进行修正。这种方法可以提高执行任务的准确性和鲁棒性，主要流程如下：
+
+1. **全局计划（Global Planner）**：整个流程首先由全局规划器接收任务输入，根据任务要求生成全局计划，划分成若干阶段（Phase 1, Phase 2, …, Phase N），并设定每个阶段的预期状态和子任务。这种全局规划为任务的顺利进行提供了大方向的指导。
+
+2. **本地代理（Local Agent）执行子任务**：每个阶段的具体子任务由本地代理来执行。本地代理接收到对应阶段的子任务和预期状态后，按照局部计划（Local Plan for Current Phase）逐步执行具体的操作（如 Action 1, Action 2 等），并根据执行结果进行检查。
+
+3. **复查和修正（Revisiting and Replanning）**：在任务执行过程中，如果本地代理未能达到预期状态，则触发复查机制。本地代理会请求全局规划器重新生成计划或进行修正，以便在下一个阶段重新尝试。这种复查过程确保即使在任务出现问题时，系统仍能及时调整，逐步靠近最终目标。
+
+4. **反馈和输出（Feedback and Output）**：每个阶段的执行结果会被反馈到全局规划器，最终将各阶段的结果进行汇总，输出任务完成的最终结果和状态。
+
+通过这种计划和复查相结合的机制，CoAct 系统能够在复杂任务中动态调整和优化执行过程，从而实现更高效和更准确的任务完成。这种框架特别适合需要多步骤并且具有一定复杂性的任务处理。
+
+
+
+**Fixing Based on Error Messages**
+
+- e.g. InterCode (Yang et al. 2023)
+
+1. **Single Turn**: Initial message and question prompt the agent for one action, then the result is evaluated.
+
+2. **"Try Again"**: The agent repeats actions up to a certain number of times if the task is not successful. Termination occurs when the reward reaches 1 or when the maximum turns are exhausted.
+
+3. **ReAct**: The agent uses a process of thoughts, actions, and observations to interact with the task iteratively, up to a predefined number of turns, stopping if successful or upon reaching the limit.
+
+4. **Plan & Solve**: The agent first devises a plan, then executes it step-by-step. The process terminates when the plan is completed or when it exceeds a certain number of steps.
+
+**基于错误消息的修复**
+
+- 例如，InterCode (Yang 等, 2023)
+
+1. **单回合**：初始消息和问题提示智能体采取一个操作，然后评估结果。
+
+2. **"重试"**：如果任务未成功，智能体会重复执行操作，直到达到成功奖励（如1）或达到最大尝试次数时终止。
+
+3. **ReAct**：智能体通过一系列的思考、行动和观察来交互完成任务，最多执行预定义的回合数，在成功或达到上限时停止。
+
+4. **计划与解决**：智能体首先制定一个计划，然后逐步执行该计划。当计划完成或超过某个步骤上限时，流程终止。
+
+这张幻灯片展示了 InterCode 系统中基于错误信息修复任务的不同策略：
+
+1. **单回合**：智能体根据问题执行单次操作，之后系统评估该操作的结果是否正确。这种方式适合简单任务，操作后即可判断是否成功。
+
+2. **"重试"**：对于较复杂的任务，系统允许智能体多次尝试相同或类似的操作，以增加成功的可能性。达到成功条件（如奖励值为1）或尝试次数用尽时终止。此方法允许智能体在失败后立即进行调整，但会有执行次数的限制。
+
+3. **ReAct**：这是一个更为动态的流程，智能体通过思考、执行操作和观察结果的循环过程不断调整策略。这种方法模拟了人类解决问题的方式，即在操作后分析结果并调整思路，直到成功或回合数耗尽。
+
+4. **计划与解决**：在这种模式下，智能体首先根据任务要求制定一个完整的计划，然后分步骤执行。该方法适合需要多步骤完成的复杂任务，智能体按计划推进，如果计划成功完成则停止，或者达到步骤上限时终止。
+
+通过这些策略，InterCode 能够更有效地根据错误反馈和任务需求选择适当的修复方案，以确保任务更高效地完成。
+
+
+
+## Safety
+
+**Coding Models can Cause Harm!**
+
+- **By accident**
+    - The coding model accidentally pushes to your main branch
+    - The coding model is told to “make the tests pass,” so it deletes the tests
+
+- **Intentionally**
+    - Coding agents can be used for hacking (Yang et al. 2023)
+
+**编码模型可能会造成危害！**
+
+- **意外情况**
+    - 编码模型意外地将代码推送到主分支
+    - 编码模型被告知“让测试通过”，因此它删除了测试代码
+
+- **故意情况**
+    - 编码代理可以被用于黑客攻击（Yang 等，2023）
+
+
+
+### Safety Mitigation 1: Sandboxing
+
+**Safety Mitigation 1: Sandboxing**
+
+- We can improve safety by limiting the execution environment
+- e.g. OpenHands executes all the actions in Docker sandboxes
+
+**安全措施 1：沙盒化**
+
+- 我们可以通过限制执行环境来提高安全性
+- 例如，OpenHands 在 Docker 沙盒中执行所有操作
+
+这张幻灯片介绍了一种提高编码模型或智能体安全性的措施，即“沙盒化”（Sandboxing）。沙盒化是一种通过限制执行环境来降低安全风险的技术。具体解释如下：
+
+1. **沙盒化的概念**：沙盒是一种隔离的执行环境，在该环境中，应用程序或代码的操作受到严格控制。任何代码在沙盒中运行时，都无法直接访问主系统或影响其他关键资源。
+
+2. **限制执行环境**：通过将智能体的执行限制在一个受控的沙盒中，可以有效防止其意外或恶意行为影响主环境。例如，如果代码在沙盒中运行，即便出现错误或安全风险，也仅限于沙盒内部，避免扩散到主系统。
+
+3. **OpenHands 案例**：在 OpenHands 框架中，所有操作都在 Docker 沙盒中执行。Docker 提供了一个容器化环境，将操作和外部系统隔离开来。这种做法确保了任何操作的影响范围仅限于 Docker 容器内，增强了系统的安全性和稳定性。
+
+4. **具体应用**：在 OpenHands 中，智能体可以通过 `Action Execution API` 与 Docker 沙盒内的各种工具（如 IPython 服务器、Bash Shell、浏览器等）进行交互，同时确保这些操作不会对外部系统造成影响。
+
+
+
+沙盒（Sandbox）是一种安全机制，用于在受控的隔离环境中运行应用程序或代码，以防止其对主系统或其他应用程序造成影响或损害。沙盒可以理解为一个“虚拟隔离区”，在其中运行的代码或程序被限制在一定的权限范围内，无法接触到主系统的敏感数据或资源。沙盒技术广泛应用于软件测试、恶意代码检测和安全管理等领域。
+
+沙盒的工作原理
+
+沙盒通过虚拟化或容器化技术，将代码或应用程序与主系统隔离开来。具体而言，沙盒会创建一个独立的环境，其中包含必要的操作系统组件和资源，但限制了对外部环境的访问权限。在这个隔离的环境中运行的程序只能访问沙盒提供的资源，而无法影响主系统或其他应用程序。
+
+常见的沙盒技术
+
+1. **虚拟机（Virtual Machine）**：虚拟机是一种独立的操作系统环境，完全隔离于宿主系统，适合运行需要完整操作系统的应用。
+
+2. **容器（如 Docker）**：容器化是一种轻量级的沙盒技术，通过共享主机操作系统内核的方式来隔离环境。Docker 是一种常见的容器化技术，广泛用于开发和部署隔离的应用。
+
+3. **浏览器沙盒**：浏览器中的沙盒机制用于限制网页脚本的权限，防止恶意脚本访问用户的文件系统或其他敏感信息。
+
+4. **操作系统沙盒**：一些操作系统提供内置的沙盒机制，将应用程序的权限限制在指定的范围内。例如，iOS 和 Android 系统将每个应用隔离在自己的沙盒中，避免应用之间互相访问数据。
+
+
+
+### Safety Mitigation 2: Credentialing
+
+**Safety Mitigation 2: Credentialing**
+
+- The principle of least privilege
+- Example: GitHub access tokens
+
+**安全措施 2：凭证管理**
+
+- 最小权限原则
+- 示例：GitHub 访问令牌
+
+这张幻灯片讨论了一种安全措施，即凭证管理（Credentialing），用来限制系统或用户的权限，从而提高安全性。凭证管理的核心是**最小权限原则**，即仅授予完成任务所需的最低权限，避免过度授权。
+
+1. **最小权限原则**：该原则指的是只给予用户或系统完成任务所需的最低权限。这样可以有效减少不必要的权限暴露，防止恶意或意外操作对系统造成不必要的风险。例如，如果一个服务只需要读取文件的权限，则不应该授予其写入或删除权限。
+
+2. **GitHub 访问令牌**：在实际应用中，GitHub 访问令牌是一种常见的凭证管理方式。GitHub 提供了访问令牌，用户可以创建特定权限的令牌，以控制访问的范围。例如，可以生成只读令牌来访问仓库，而不允许进行写操作或删除仓库。这样，即使令牌泄露，未经授权的用户也无法进行破坏性操作。
+
+3. **凭证管理的好处**：通过严格管理凭证，系统可以在授权访问的同时，最大程度地保护敏感数据和操作。即便凭证泄露，最小权限原则确保了潜在的损害降到最低。
+
+凭证管理是许多现代安全体系的重要组成部分，帮助开发者和管理员更好地控制系统访问权限，从而提高系统的整体安全性。
+
+
+
+### Safety Mitigation 3: Post-hoc Auditing
+
+**Safety Mitigation 3: Post-hoc Auditing**
+
+- e.g. OpenHands security analyzer
+- Using LMs, analysis, or both
+
+**安全措施 3：事后审计**
+
+- 示例：OpenHands 安全分析器
+- 使用语言模型（LM）、分析工具，或两者结合
+
+这张幻灯片介绍了事后审计（Post-hoc Auditing）作为一种安全保障措施。事后审计是指在操作完成后，对系统的操作记录或结果进行分析，以确保操作符合安全规范，并检测潜在的风险或错误。具体内容如下：
+
+1. **事后审计的概念**：事后审计是一种在操作完成后，通过回溯操作记录来检测潜在问题的方法。它允许系统在实际操作中积累数据，并在后续分析中发现异常或不安全行为。
+
+2. **OpenHands 安全分析器**：在 OpenHands 框架中，事后审计功能由安全分析器实现。这个分析器会记录智能体的操作步骤（如“Action”），并在每个操作后通过观察（“Observation”）进行检查，如果操作符合预期，则标记为“OK”；如果操作存在问题，则标记为“NO”，并进一步分析原因。
+
+3. **使用语言模型和分析工具**：事后审计可以通过语言模型（如大语言模型）和分析工具结合使用。语言模型可以帮助解析操作的上下文和目的，判断操作是否符合预期；分析工具则可以基于操作的执行结果，发现任何潜在的错误或安全问题。两者结合可以提高审计的准确性和效率。
+
+4. **审计的优势**：事后审计能够提供一个额外的安全层，即使在操作过程中未能完全避免风险，事后审计可以帮助发现问题并采取补救措施，从而提高系统的整体安全性。
+
+总之，事后审计是一个有用的安全策略，特别是在复杂的自动化系统中，能够在运行之后识别并分析潜在的风险，以确保系统的持续安全和合规。
+
+
+
+## Conclusion
+
+**Summary**
+
+- Copilots already very useful, code agents getting there
+- Current challenges: code LLMs, editing, localization, planning, safety
+- Future directions:
+    - Agentic training methods
+    - Human-in-the-loop
+    - Broader software tasks than coding
+
+**总结**
+
+- Copilots 已经非常有用，代码智能体也在逐渐成熟
+- 当前的挑战：代码 LLMs、编辑、定位、规划、安全
+- 未来方向：
+    - 智能体的训练方法
+    - 人机协作
+    - 拓展到编程以外的软件任务
+
+这张幻灯片总结了关于代码智能体（如编程助手 Copilot）目前的进展、面临的挑战以及未来的发展方向：
+
+1. **当前的应用现状**：编程助手（如 GitHub Copilot）已经被证明是非常有用的工具，可以极大提高开发效率。代码智能体也在不断发展，逐渐接近成熟，可以完成越来越复杂的代码生成和编辑任务。
+
+2. **当前的挑战**：
+    - **代码 LLMs**：大语言模型（LLMs）在代码生成中的应用仍然存在改进空间，例如如何更准确地生成符合规范的代码。
+    - **编辑**：代码智能体在自动化编辑已有代码、理解代码上下文等方面仍面临挑战。
+    - **定位（Localization）**：在大型代码库中准确定位相关代码片段或文件，是智能体需要克服的一大难题。
+    - **规划（Planning）**：代码智能体在处理复杂任务时需要具备规划能力，即如何分解任务并按步骤完成。
+    - **安全**：确保代码生成过程中的安全性，防止意外或恶意行为。
+
+3. **未来的发展方向**：
+    - **智能体的训练方法**：未来的代码智能体将探索新的训练方法，以提升其自主性和准确性。
+    - **人机协作（Human-in-the-loop）**：将人类参与融入代码生成过程，以确保智能体的输出符合人类的需求，并在必要时提供反馈。
+    - **拓展至更广泛的软件任务**：代码智能体的应用将超越编程任务，扩展到更多的软件开发任务，如自动化测试、文档生成和系统管理等。
+
+
+
+# Lecture 7, Nicolas Chapados and Alexandre Drouin
 
 
 
 # 未完待续
 
-敬请期待。。。
 
